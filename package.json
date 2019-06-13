@@ -1,0 +1,23 @@
+{
+  "name": "Delux-Bill-Splitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "prestart": "npm install",
+    "dev": "cd client && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djknit/Delux-Bill-Splitter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djknit/Delux-Bill-Splitter/issues"
+  },
+  "homepage": "https://github.com/djknit/Delux-Bill-Splitter#readme"
+}
