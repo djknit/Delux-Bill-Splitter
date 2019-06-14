@@ -1,8 +1,8 @@
+<!DOCTYPE html>
 <!-- Note from Dave:
-    I copied some files from the "angular-seed" package to get me started and there are several things from there in this file which I'm not sure exactly what they do.
+    I used the "angular-seed" package to bootstrap this app.
 -->
 
-<!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" ng-app="billsApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="billsApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="billsApp" class="no-js lt-ie9"> <![endif]-->
@@ -10,32 +10,37 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Bill Splitter Delux</title>
   <meta name="description" content="For all your bill balancing needs">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
-  <link rel="shortcut icon" href="favicon.ico" />
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="lib/angular/angular.js"></script>
-  <script src="lib/angular-route/angular-route.js"></script>
-  <script src="app.js"></script>
-  <script src="views/home/home.js"></script>
-  <script src="views/enter-bills/enter-bills.js"></script>
+  <link rel="shortcut icon" href="favicon.ico" />
+  <title>Bill Splitter Delux</title>
 </head>
 <body>
 
   <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-<div my-header></div>
+  <div header></div>
 
   <div ng-view></div>
+
+  <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="app.module.js"></script>
+  <script src="app.config.js"></script>
+  <script src="app.directive.js"></script>
+  <script src="views/home/home.module.js"></script>
+  <script src="views/home/home.component.js"></script>
+  <script src="views/enter-bills/enter-bills.module.js"></script>
+  <script src="views/enter-bills/enter-bills.component.js"></script>
   
 </body>
 </html>
