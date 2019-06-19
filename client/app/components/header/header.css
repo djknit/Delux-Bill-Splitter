@@ -1,0 +1,38 @@
+#main-header {
+  padding: 12px 20px;
+  border-bottom: solid 1px black;
+  box-shadow: 0 1px 3px 1px #555555;
+}
+
+#main-header .brand {
+  font-family: 'Just Another Hand', cursive;
+  font-size: 24px;
+}
+
+span.dollar-sign {
+  /* "Money Green" - source: https://www.colourlovers.com/color/216C2A/money_green */
+  color: #216C2A;
+  font-size: 36px;
+  position: relative;
+  top: 4px;
+}
+
+#main-header ul.menu {
+  margin: 0;
+  border: none;
+  display: inline-block;
+}
+@media screen and (max-width: 1024px) {
+  #main-header {
+    padding: 6px 10px;
+  }
+}
+@media screen and (max-width: 780px) {
+  #main-header {
+    padding: 3px 5px;
+  }
+}
+
+a.nav-link {
+  display: inline-block;
+}

@@ -6,6 +6,8 @@ angular
     [
       'ngRoute',
       'homeView',
-      'enterBillsView'
+      'enterBillsView',
+      'pageHeader',
+      'alert'
     ]
   );

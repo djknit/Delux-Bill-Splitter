@@ -23,3 +23,17 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+#router-view-container {
+  padding: 10px 30px;
+}
+@media screen and (max-width: 1024px) {
+  #router-view-container {
+    padding: 10 15px;
+  }
+}
+@media screen and (max-width: 780px) {
+  #router-view-container {
+    padding: 5 5px;
+  }
+}

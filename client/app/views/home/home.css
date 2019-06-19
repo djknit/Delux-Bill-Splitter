@@ -1,0 +1,11 @@
+home-view {
+  text-align: center;
+}
+
+home-view .emphasis {
+  font-style: italic;
+}
+
+home-view alert:first-of-type {
+  font-size: 1.2rem;
+}
