@@ -1,0 +1,19 @@
+enter-bills-view > h2,
+enter-bills-view > alert > h4 {
+  text-align: center;
+}
+
+enter-bills-view > alert li {
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: .5rem;
+}
+
+enter-bills-view > alert li > p {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+enter-bills-view .card-footer {
+  text-align: right;
+}
