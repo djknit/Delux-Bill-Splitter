@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="views/enter-bills/enter-bills.css">
 
 <h2>Bill Entry Page</h2>
+<hr />
 
 <alert theme="'info'">
   <h5>Follow these steps</h5>
@@ -18,14 +19,19 @@
   </ol>
 </alert>
 
+<participants-section participants="$ctrl.participants"></participants-section>
+
 <div class="card">
-  <h5 class="card-header">Participants</h5>
+  <h5 class="card-header">Bills</h5>
   <div class="card-body">
-    <p ng-if="$ctrl.participants.length < 1" class="mb-0 text-center">
-      There are no participants in this list yet. Click the "Add" button below to add participants.
+    <p ng-if="$ctrl.bills.length < 1" class="my-4 text-center">
+      There are no bills in this list yet. Click the "Add" button below to add a bill.
     </p>
   </div>
   <div class="card-footer">
     <button class="btn btn-primary">+ Add</button>
   </div>
 </div>
+
+<hr />
+<button class="btn btn-primary">Calculate Bills</button>

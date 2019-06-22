@@ -1,0 +1,24 @@
+<link
+  rel="stylesheet"
+  href="components/enter-bills-view/participants-section/participants.css"
+>
+
+<div class="card mb-3">
+  <h5 class="card-header">Participants</h5>
+  <div class="card-body">
+    <p ng-if="$ctrl.participants.length < 1" class="my-4 text-center">
+      There are no participants in this list yet. Click the "Add" button below to add participants.
+    </p>
+    <div ng-repeat="participant in $ctrl.participants track by participant.id" class="card participant">
+      <div class="card-body">
+        <button class="remove btn btn-danger">
+          <span>&times;</span>
+        </button>
+        <h4>{{participant.name}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary" ng-click="">+ Add</button>
+  </div>
+</div>
