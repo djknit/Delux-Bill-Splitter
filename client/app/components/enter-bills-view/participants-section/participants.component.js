@@ -7,5 +7,6 @@ angular
     bindings: {
       participants: '='
     },
-    transclude: false
+    transclude: false,
+    controller: function participantsSectionCtrl() {}
   });

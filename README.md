@@ -16,6 +16,7 @@
 ## Project Goals
 * This app aims to be an easy tool to split any bill or group of bills any way between any number of people.
 * Use AngularJS for the front end. (This is my first major project built with AngularJS.)
+* Modularize code as much as is practical.
 * Minimum Viable Product should include:
   * Ability to create new bill list with participants identified by name.
   * Ability to add any number of bills to each list, each of which should collect the following information.

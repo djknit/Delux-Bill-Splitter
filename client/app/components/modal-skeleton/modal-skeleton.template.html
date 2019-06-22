@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="components/modal-skeleton/modal-skeleton.css">
+
+<div
+  class="modal fade"
+  id="{{$ctrl.modalName}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="{{$ctrl.modalName + 'Label'}}"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="{{$ctrl.modalName + 'Label'}}">
+          {{$ctrl.title}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div ng-transclude></div>
+      </div>
+      <div class="modal-footer">
+        <button ng-if="!$ctrl.hasSuccess" type="button" class="btn btn-secondary" data-dismiss="modal">
+          Cancel
+        </button>
+        <button ng-if="$ctrl.hasSuccess" type="button" class="btn btn-success" data-dismiss="modal">
+          OK
+        </button>
+        <button ng-if="!$ctrl.hasSuccess" ng-click="$ctrl.buttonAction" type="button" class="btn btn-primary">
+          {{$ctrl.buttonMessage}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

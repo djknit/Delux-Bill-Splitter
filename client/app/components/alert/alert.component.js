@@ -5,8 +5,8 @@ angular
   .component('alert', {
     templateUrl: 'components/alert/alert.template.html',
     bindings: {
-      theme: '=',
-      message: '='
+      // source for good info on binding types: https://codeburst.io/tips-on-passing-data-between-components-in-angularjs-f36c4ad47cca
+      theme: '<'
     },
     transclude: true
   });
