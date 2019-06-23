@@ -8,7 +8,6 @@ angular
       'homeView',
       'enterBillsView',
       'pageHeader',
-      'alert',
-      'modalSkeleton'
+      'alert'
     ]
   );

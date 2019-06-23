@@ -46,6 +46,7 @@
 ## Technologies Used
 #### Front End
 * AngularJS
+* Bootstrap
 * Node
 * Other Node packages:
   * angular-seed
