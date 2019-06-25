@@ -9,9 +9,15 @@
     <p ng-if="$ctrl.participants.length < 1" class="my-4 text-center">
       There are no participants in this list yet. Click the "Add" button below to add participants.
     </p>
-    <div ng-repeat="participant in $ctrl.participants track by participant.id" class="card participant">
+    <div
+      ng-repeat="participant in $ctrl.participants track by participant.id"
+      class="card participant"
+    >
       <div class="card-body">
-        <button class="remove btn btn-danger">
+        <button
+          class="remove btn btn-danger"
+          title="{{'Remove ' + participant.name}}"
+        >
           <span>&times;</span>
         </button>
         <h4>{{participant.name}}</h4>
@@ -19,8 +25,15 @@
     </div>
   </div>
   <div class="card-footer">
-    <button class="btn btn-primary">+ Add</button>
+    <button class="btn btn-primary" ng-click="$ctrl.openModal()" title="Add participant">
+      + Add
+    </button>
   </div>
 </div>
 
-<!-- <add-participant-modal></add-participant-modal> -->
+<add-participant-modal
+  modal-name="{{$ctrl.MODAL_NAME}}"
+  name-input-name="{{$ctrl.NAME_INPUT_NAME}}"
+  add-participant="$ctrl.addParticipant"
+  focus-input="$ctrl.delayedFocusInput"
+></add-participant-modal>

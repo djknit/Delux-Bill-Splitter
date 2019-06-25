@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="views/enter-bills/enter-bills.css">
 
-<h2>Bill Entry Page</h2>
+<h1 class="brand-font">Bill Entry Page</h1>
 <hr />
 
-<alert theme="'info'">
+<alert theme="info">
   <h5>Follow these steps</h5>
   <hr />
   <ol>
@@ -19,7 +19,10 @@
   </ol>
 </alert>
 
-<participants-section participants="$ctrl.participants"></participants-section>
+<participants-section
+  participants="$ctrl.participants"
+  add-participant="$ctrl.addParticipant"
+></participants-section>
 
 <div class="card">
   <h5 class="card-header">Bills</h5>

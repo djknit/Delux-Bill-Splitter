@@ -1,12 +1,50 @@
-<modal-skeleton
-  modalName="addParticipantModal"
-  title="Add Participant"
-  buttonMessage="+Add"
-  buttonAction="#"
-  hasSuccess="#"
-  hasDanger="#"
+<link
+  rel="stylesheet"
+  href="components/enter-bills-view/participants-section/add-participant-modal/add-participant.css"
 >
-  <form>
-    
-  </form>
+
+<modal-skeleton
+  modal-name="{{$ctrl.modalName}}"
+  title="Add Participant"
+  has-success="$ctrl.hasSuccess"
+  has-danger="false"
+  reset="$ctrl.reset"
+>
+
+  <modal-body>
+    <form ng-if="!$ctrl.hasSuccess" id="{{$ctrl.FORM_NAME}}">
+      <div class="form-group">
+        <label for="{{$ctrl.nameInputName}}">New Participant Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="{{$ctrl.nameInputName}}"
+          aria-describedby="{{$ctrl.nameInputName + 'Help'}}"
+          placeholder="Enter a name for the new participant."
+          ng-model="$ctrl.nameInputValue"
+          ng-change="$ctrl.updateButtonDisable()"
+          ng-disabled="$ctrl.isInputDisabled"
+        >
+      </div>
+    </form>
+    <alert ng-if="$ctrl.hasSuccess" theme="success">
+      <h4>Success!</h4>
+      <span class="name person">{{$ctrl.newParticipant.name}}</span> was added
+      as a participant to this list.
+    </alert>
+  </modal-body>
+
+  <!-- Footer also has cancel button (from modal skeleton) in addition to unique content defined below -->
+  <modal-footer>
+    <button
+      ng-click="$ctrl.hasSuccess ? $ctrl.addAnotherParticipant() : $ctrl.submitForm()"
+      type="{{$ctrl.hasSuccess ? 'button' : 'submit'}}"
+      form="{{$ctrl.FORM_NAME}}"
+      class="btn btn-primary"
+      ng-disabled="$ctrl.isButtonDisabled && !$ctrl.hasSuccess"
+    >
+      {{$ctrl.hasSuccess ? 'Add another participant' : '+Add'}}
+    </button>
+  </modal-footer>
+
 </modal-skeleton>

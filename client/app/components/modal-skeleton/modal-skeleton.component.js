@@ -2,16 +2,19 @@
 
 angular
   .module('modalSkeleton')
-  .componenet('modalSkeleton', {
+  .component('modalSkeleton', {
     templateUrl: 'components/modal-skeleton/modal-skeleton.template.html',
     bindings: {
       // source for good info on binding types: https://codeburst.io/tips-on-passing-data-between-components-in-angularjs-f36c4ad47cca
       modalName: '@',
       title: '@',
-      buttonMessage: '@',
-      buttonAction: '&',
       hasSuccess: '<',
-      hasDanger: '<'
+      hasDanger: '<',
+      hideCancelButton: '<',
+      reset: '<'
     },
-    transclude: true
+    transclude: {
+      bodyContent: 'modalBody',
+      footerContent: '?modalFooter'
+    }
   });

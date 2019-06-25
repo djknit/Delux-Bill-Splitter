@@ -1,0 +1,7 @@
+.modal.success > .modal-dialog > .modal-content {
+  border: 2px solid #28a745;
+}
+
+.modal.danger > .modal-dialog > .modal-content {
+  border: 2px solid #dc3545;
+}

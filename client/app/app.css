@@ -1,29 +1,14 @@
-/* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+/* Styles used throughout app (in multiple components) */
+.name {
+  font-style: italic;
 }
 
-.menu:before {
-  content: "[";
+.brand-font {
+  font-family: 'Just Another Hand', 'Brush Script MT', cursive;
 }
 
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
+/* --------------------------------------------------------------------------- */
+/* Styles for index.html (for elements that are not inside a component) */
 #router-view-container {
   padding: 10px 30px;
 }

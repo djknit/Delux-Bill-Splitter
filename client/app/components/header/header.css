@@ -5,7 +5,7 @@
 }
 
 #main-header .brand {
-  font-family: 'Just Another Hand', cursive;
+  font-family: 'Just Another Hand', 'Brush Script MT', cursive;
   font-size: 24px;
 }
 
@@ -17,11 +17,27 @@ span.dollar-sign {
   top: 4px;
 }
 
-#main-header ul.menu {
+#main-header > ul.menu {
   margin: 0;
+  padding: 0 0 0.5em;
   border: none;
   display: inline-block;
 }
+/* I borrowed the following menu styles from "angular-seed" */
+#main-header > ul.menu:before {
+  content: "[";
+}
+#main-header > ul.menu:after {
+  content: "]";
+}
+#main-header > ul.menu > li {
+  display: inline;
+}
+#main-header > ul.menu > li + li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
 @media screen and (max-width: 1024px) {
   #main-header {
     padding: 6px 10px;
