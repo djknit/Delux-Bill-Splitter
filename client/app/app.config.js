@@ -7,15 +7,14 @@ angular
     '$routeProvider',
     function config($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
-      // $routeProvider.otherwise({redirectTo: '/'});
 
-      $routeProvider.
-        when('/', {
+      $routeProvider
+        .when('/', {
           template: '<home-view></home-view>'
-        }).
-        when('/enter-bills', {
+        })
+        .when('/enter-bills', {
           template: '<enter-bills-view></enter-bills-view>'
-        }).
-        otherwise('/');
+        })
+        .otherwise('/');
     }
   ]);

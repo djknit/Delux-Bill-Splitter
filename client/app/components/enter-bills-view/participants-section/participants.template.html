@@ -17,6 +17,7 @@
         <button
           class="remove btn btn-danger"
           title="{{'Remove ' + participant.name}}"
+          ng-click="$ctrl.openRemoveParticipantModal(participant)"
         >
           <span>&times;</span>
         </button>
@@ -25,15 +26,25 @@
     </div>
   </div>
   <div class="card-footer">
-    <button class="btn btn-primary" ng-click="$ctrl.openModal()" title="Add participant">
+    <button
+      class="btn btn-primary"
+      ng-click="$ctrl.openAddParticipantModal()"
+      title="Add participant"
+    >
       + Add
     </button>
   </div>
 </div>
 
 <add-participant-modal
-  modal-name="{{$ctrl.MODAL_NAME}}"
+  modal-name="{{$ctrl.ADD_PRTCPNT_MODAL_NAME}}"
   name-input-name="{{$ctrl.NAME_INPUT_NAME}}"
   add-participant="$ctrl.addParticipant"
   focus-input="$ctrl.delayedFocusInput"
 ></add-participant-modal>
+
+<remove-participant-modal
+  modal-name="{{$ctrl.REMOVE_PRTCPNT_MODAL_NAME}}"
+  participant="$ctrl.participantToRemove"
+  remove-participant="$ctrl.removeParticipant"
+></remove-participant-modal>

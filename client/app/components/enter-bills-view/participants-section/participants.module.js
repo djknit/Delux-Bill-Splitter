@@ -3,6 +3,7 @@
 angular
   .module('participantsSection',
     [
-      'addParticipantModal'
+      'addParticipantModal',
+      'removeParticipantModal'
     ]
   );

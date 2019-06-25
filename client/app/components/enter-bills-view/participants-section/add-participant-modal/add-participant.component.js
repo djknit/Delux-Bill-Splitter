@@ -10,7 +10,7 @@ angular
       addParticipant: '<',
       focusInput: '<'
     },
-    controller: ['$scope', function addParicipantModalCtrl($scope) {
+    controller: ['$scope', function addParticipantModalCtrl($scope) {
       this.FORM_NAME = 'newParticipantForm';
 
       this.nameInputValue = '';

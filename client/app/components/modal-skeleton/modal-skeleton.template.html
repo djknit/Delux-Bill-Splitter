@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="components/modal-skeleton/modal-skeleton.css">
 
 <div
-  ng-class="'modal fade ' + ($ctrl.hasSuccess ? 'success' : '') || ($ctrl.hasDanger ? 'danger' : '')"
+  ng-class="'modal fade ' + ($ctrl.hasSuccess ? 'success' : '') + ($ctrl.hasDanger ? 'danger' : '')"
   id="{{$ctrl.modalName}}"
   tabindex="-1"
   role="dialog"

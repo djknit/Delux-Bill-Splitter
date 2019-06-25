@@ -21,5 +21,18 @@ angular
           resolve(newParticipant); 
         }
       );
+
+      this.removeParticipant = (id) => new Promise(
+        (resolve, reject) => {
+          for (let i = 0; i < this.participants.length; i++) {
+            if (this.participants[i].id === id) {
+              const removedParticipantName = this.participants[i].name;
+              this.participants.splice(i, 1);
+              return resolve(removedParticipantName);
+            }
+          }
+          reject({ message: 'Sorry, that participant could not be found. Please try again.' });
+        }
+      );
     }
   });

@@ -1,0 +1,49 @@
+<link
+  rel="stylesheet"
+  href="components/enter-bills-view/participants-section/remove-participant-modal/remove-participant.css"
+>
+
+<modal-skeleton
+  modal-name="{{$ctrl.modalName}}"
+  title="Remove Participant"
+  has-success="$ctrl.hasSuccess"
+  has-danger="!$ctrl.hasSuccess"
+  reset="$ctrl.reset"
+>
+
+  <modal-body>
+    <div ng-if="!$ctrl.hasSuccess && !ctrl.hasError">
+      <alert theme="danger">
+        You are about to remove <span class="name person">{{$ctrl.participant.name}}</span> from
+        this list's participants. You will <strong>not</strong> be able to easily undo this action.
+      </alert>
+      <span class="modal-question">
+        Are you sure you want remove <span class="name person">{{$ctrl.participant.name}}</span>?
+      </span>
+    </div>
+    <alert ng-if="$ctrl.hasSuccess" theme="success">
+        <h4>Success!</h4>
+        <span class="name person">{{$ctrl.removedParticipantName}}</span> was successfully
+        removed from this list's participants.
+    </alert>
+    <alert ng-if="$ctrl.hasError" theme="danger">
+      <h4>Error</h4>
+      {{$ctrl.errorMessage}}
+    </alert>
+  </modal-body>
+
+  <!-- Footer also has cancel button (from modal skeleton) in addition to unique content defined below -->
+  <modal-footer>
+    <button
+      ng-if="!$ctrl.hasSuccess && !$ctrl.hasError"
+      ng-click="$ctrl.confirmRemove($ctrl.participant.id)"
+      type="button"
+      form="{{$ctrl.FORM_NAME}}"
+      class="btn btn-danger"
+      ng-disabled="$ctrl.isButtonDisabled"
+    >
+      Remove
+    </button>
+  </modal-footer>
+
+</modal-skeleton>
