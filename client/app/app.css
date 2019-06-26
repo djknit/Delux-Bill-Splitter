@@ -1,4 +1,6 @@
+/* --------------------------------------------------------------------------- */
 /* Styles used throughout app (in multiple components) */
+
 .name {
   font-style: italic;
 }
@@ -7,8 +9,16 @@
   font-family: 'Just Another Hand', 'Brush Script MT', cursive;
 }
 
+modal-body > alert > .alert {
+  margin: 0;
+}
+
+/* **************************************************************************** */
+/* **************************************************************************** */
+
 /* --------------------------------------------------------------------------- */
 /* Styles for index.html (for elements that are not inside a component) */
+
 #router-view-container {
   padding: 10px 30px;
 }

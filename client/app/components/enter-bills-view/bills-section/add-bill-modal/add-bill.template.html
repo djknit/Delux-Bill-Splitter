@@ -1,13 +1,13 @@
 <link
   rel="stylesheet"
-  href="components/enter-bills-view/participants-section/add-participant-modal/add-participant.css"
+  href="components/enter-bills-view/bills-section/add-bill-modal/add-bill.css"
 >
 
 <modal-skeleton
   modal-name="{{$ctrl.modalName}}"
-  title="Add Participant"
+  title="Add Bill"
   has-success="$ctrl.hasSuccess"
-  has-danger="$ctrl.hasError"
+  has-danger="false"
   reset="$ctrl.reset"
 >
 
@@ -15,34 +15,40 @@
 
     <form ng-if="!$ctrl.hasSuccess" id="{{$ctrl.FORM_NAME}}">
       <div class="form-group">
-        <label for="{{$ctrl.nameInputName}}">New Participant Name</label>
+        <label for="{{$ctrl.nameInputName}}">
+          Bill Name <span class="normal">(Optional)</span>
+        </label>
         <input
           type="text"
           class="form-control"
           id="{{$ctrl.nameInputName}}"
-          aria-describedby="{{$ctrl.nameInputName + 'Help'}}"
-          placeholder="Enter a name for the new participant."
+          placeholder="Give the bill a nickname..."
           ng-model="$ctrl.nameInputValue"
           ng-change="$ctrl.updateButtonDisable()"
           ng-disabled="$ctrl.isInputDisabled"
         >
       </div>
+      <div class="form-group amount">
+        <label for="{{$ctrl.AMOUNT_INPUT_NAME}}">
+          Amount
+        </label>
+        <input
+          type="number"
+          step=".01"
+          class="form-control"
+          id="{{$ctrl.AMOUNT_INPUT_NAME}}"
+          ng-model="$ctrl.amountInputValue"
+          ng-disabled="$ctrl.isInputDisabled"
+          ng-change="$ctrl.updateAmountDisplay()"
+        >
+        <div id="formatted-amount-display">{{$ctrl.amountDisplayValue}}</div>
+      </div>
     </form>
 
     <alert ng-if="$ctrl.hasSuccess" theme="success">
       <h4>Success!</h4>
-      <span class="name person">{{$ctrl.newParticipant.name}}</span> was added
-      as a participant to this list.
-    </alert>
-
-    <alert ng-if="$ctrl.hasError" theme="danger">
-      <h4>Error</h4>
-      <span ng-if="$ctrl.nameInErrorMessage">
-        {{$ctrl.errorMessage[0]}}
-        <span class="name">"{{$ctrl.nameInErrorMessage}}."</span>
-        {{$ctrl.errorMessage[1]}}
-      </span>
-      <!-- {{$ctrl.errorMessage || 'Unknown error'}} -->
+      The bill <span class="name person">"{{$ctrl.newBill.name}}"</span> was added
+      to this list.
     </alert>
 
   </modal-body>

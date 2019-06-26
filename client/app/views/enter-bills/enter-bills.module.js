@@ -3,5 +3,6 @@
 angular
   .module('enterBillsView', [
     'ngRoute',
-    'participantsSection'
+    'participantsSection',
+    'billsSection'
   ]);

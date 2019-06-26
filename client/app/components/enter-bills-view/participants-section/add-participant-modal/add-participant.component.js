@@ -18,6 +18,9 @@ angular
       this.hasSuccess = false;
       this.isInputDisabled = false;
       this.newParticipant = null;
+      this.hasError = false;
+      this.errorMessage = null;
+      this.nameInErrorMessage = null;
 
       this.updateButtonDisable = () => {
         this.isButtonDisabled = this.nameInputValue === '';
@@ -28,7 +31,19 @@ angular
         this.addParticipant(this.nameInputValue)
           .then(newParticipant => {
             this.hasSuccess = true;
+            this.hasError = false;
             this.newParticipant = newParticipant;
+            this.nameInErrorMessage = null;
+            // Updates view.
+              // source: https://www.jeffryhouser.com/index.cfm/2014/6/2/How-do-I-run-code-when-a-variable-changes-with-angularjs
+            $scope.$apply();
+          })
+          .catch(err => {
+            this.hasError = true;
+            this.errorMessage = (err && err.message)
+              || 'An unknown error was encountered. Please try again.';
+            this.nameInErrorMessage = (err && err.name) || null;
+            this.disableForm(false);
             $scope.$apply();
           });
       };
@@ -42,8 +57,13 @@ angular
 
       this.reset = () => {
         this.nameInputValue = '';
+        this.isButtonDisabled = true;
         this.hasSuccess = false;
-        this.disableForm(false);
+        this.isInputDisabled = false;
+        this.newParticipant = null;
+        this.hasError = false;
+        this.errorMessage = null;
+        this.nameInErrorMessage = null;
       };
 
       this.addAnotherParticipant = () => {

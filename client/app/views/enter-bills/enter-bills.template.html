@@ -25,17 +25,14 @@
   remove-participant="$ctrl.removeParticipant"
 ></participants-section>
 
-<div class="card">
-  <h5 class="card-header">Bills</h5>
-  <div class="card-body">
-    <p ng-if="$ctrl.bills.length < 1" class="my-4 text-center">
-      There are no bills in this list yet. Click the "Add" button below to add a bill.
-    </p>
-  </div>
-  <div class="card-footer">
-    <button class="btn btn-primary">+ Add</button>
-  </div>
-</div>
+<bills-section
+  bills="$ctrl.bills"
+  add-bill="$ctrl.addBill"
+  remove-bill="$ctrl.removeBill"
+  participants="$ctrl.participants"
+  agents="$ctrl.agents"
+  add-agent="$ctrl.addAgent"
+></bills-section>
 
 <hr />
 <button class="btn btn-primary">Calculate Bills</button>

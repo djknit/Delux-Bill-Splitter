@@ -1,3 +1,9 @@
 .name {
   font-style: italic;
 }
+
+add-participant-modal .form-group > label {
+  font-weight: 500;
+}
+
+/* alert margin is removed by style defined in app.css */

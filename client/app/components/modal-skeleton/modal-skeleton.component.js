@@ -10,11 +10,23 @@ angular
       title: '@',
       hasSuccess: '<',
       hasDanger: '<',
-      hideCancelButton: '<',
-      reset: '<'
+      reset: '<',
+      cancelButtonSuccessText: '@',
+      isCancelButtonSuccess: '<'
     },
     transclude: {
       bodyContent: 'modalBody',
       footerContent: '?modalFooter'
+    },
+    controller: function modalSkelCtrl() {
+
+      // wait .2 sec before resetting content on 'Cancel' and 'Done' button press
+      // this keeps content from changing before modal has closed (which looked bad)
+      this.delayedReset = () => {
+        setTimeout(() => {
+          this.reset();
+        }, 200);
+      }
+
     }
   });

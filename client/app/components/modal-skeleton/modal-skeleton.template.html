@@ -34,11 +34,11 @@
         <button
           ng-if="!$ctrl.hideCancelButton"
           type="button"
-          class="btn btn-secondary"
+          ng-class="'btn ' + ($ctrl.isCancelButtonSuccess && $ctrl.hasSuccess ? 'btn-success' : 'btn-secondary')"
           data-dismiss="modal"
-          ng-click="$ctrl.reset()"
+          ng-click="$ctrl.delayedReset()"
         >
-          {{$ctrl.hasSuccess ? 'Done' : 'Cancel'}}
+          {{$ctrl.hasSuccess ? ($ctrl.cancelButtonSuccessText || 'Done') : 'Cancel'}}
         </button>
         <span ng-transclude="footerContent"></span>
       </div>
