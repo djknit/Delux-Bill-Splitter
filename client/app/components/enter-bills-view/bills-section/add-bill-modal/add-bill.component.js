@@ -17,8 +17,8 @@ angular
       this.AMOUNT_INPUT_NAME = 'newBillAmountIn';
 
       this.nameInputValue = '';
-      this.amountInputValue = 0;
-      this.amountDisplayValue = undefined;
+      this.amountInputValue = null;
+      this.amountDisplayValue = null;
 
       this.isButtonDisabled = true;
       this.hasSuccess = false;
@@ -30,13 +30,8 @@ angular
       };
 
       this.updateAmountDisplay = () => {
-        console.log(this.amountInputValue);
-        console.log($filter('currency'));
-        const roundedValue = parseFloat(this.amountInputValue.toFixed(2));
-        const val = $filter('currency')(roundedValue);
-        console.log(val);
-        console.log(parseFloat(val));
-        this.amountDisplayValue = val;
+        if (!this.amountInputValue && this.amountInputValue !== 0) return this.amountDisplayValue = null;
+        else this.amountDisplayValue = this.amountInputValue.toFixed(2);
       }
 
       this.submitForm = () => {

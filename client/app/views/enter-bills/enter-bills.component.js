@@ -25,14 +25,14 @@ angular
           // if new entity is not a participant, then it is an agent
           let entitiesArray = isParticipant ? this.participants : this.agents;
           let entityType = isParticipant ? 'participant' : 'agent';
-          let test = this.isDuplicate(trimmedName, entitiesArray);
+          // let test = this.isDuplicate(trimmedName, entitiesArray);
           if (this.isDuplicate(trimmedName, entitiesArray)) {
             return reject({
               message: [
                 'There is already ' + (isParticipant ? 'a ' : 'an ') + entityType + ' in this'
                   + ' list with the name',
-                'If you have two participants with the same name, you must add a number or'
-                  + ' other marker so that they can be identified.'
+                'If you have two ' + entityType + 's with the same name, you must add a number'
+                  + ' or other marker so that they can be identified.'
               ],
               name: trimmedName
             });
@@ -88,7 +88,7 @@ angular
               return resolve(removedBill);
             }
           }
-          reject({ message: 'Sorry, that participant could not be found. Please try again.' });
+          reject({ message: 'Sorry, that bill could not be found. Please try again.' });
         }
       );
 

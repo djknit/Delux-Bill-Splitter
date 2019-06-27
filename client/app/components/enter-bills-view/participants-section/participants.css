@@ -2,6 +2,7 @@
   display: inline-block;
   position: relative;
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .participant.card .remove.btn {
