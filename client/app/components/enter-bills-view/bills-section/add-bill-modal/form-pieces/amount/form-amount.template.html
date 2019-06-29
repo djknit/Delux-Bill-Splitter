@@ -1,0 +1,25 @@
+<div class="form-group amount">
+  <label for="{{$ctrl.AMOUNT_INPUT_NAME}}">
+    Bill Total <span class="normal">(US Dollars)</span>
+  </label>
+  <input
+    type="number"
+    class="form-control"
+    id="{{$ctrl.AMOUNT_INPUT_NAME}}"
+    ng-model="$ctrl.amountInputValue"
+    ng-disabled="$ctrl.isInputDisabled"
+    ng-change="$ctrl.updateAmountDisplay()"
+  />
+  <div
+    ng-if="$ctrl.amountDisplayValue !== null && $ctrl.amountDisplayValue !== 'negative'"
+    id="formatted-amount-display"
+  >
+    $ {{$ctrl.amountDisplayValue}}
+  </div>
+  <div
+    ng-if="$ctrl.amountDisplayValue === 'negative'"
+    id="no-negative-amount-message"
+  >
+    Negative values are not allowed
+  </div>
+</div>

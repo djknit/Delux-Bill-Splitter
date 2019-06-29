@@ -9,7 +9,7 @@
       <a
         href="#!/"
         ng-class="$ctrl.isHomeView ? 'nav-link disabled' : 'nav-link'"
-        ng-click="$ctrl.isHomeView = true"
+        ng-click="$ctrl.reportHashChange('#!/')"
       >
         Home
       </a>
@@ -18,7 +18,7 @@
       <a
         href="#!/enter-bills"
         ng-class="!$ctrl.isHomeView ? 'nav-link disabled' : 'nav-link'"
-        ng-click="$ctrl.isHomeView = false"
+        ng-click="$ctrl.reportHashChange('#!/enter-bills')"
       >
         Add Bills
       </a>

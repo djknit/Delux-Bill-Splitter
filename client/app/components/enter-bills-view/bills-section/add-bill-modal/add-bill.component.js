@@ -12,34 +12,68 @@ angular
       participants: '<',
       agents: '<'
     },
-    controller: ['$scope', '$filter', function addBillModalCtrl($scope, $filter) {
+    controller: ['$scope', function addBillModalCtrl($scope) {
       this.FORM_NAME = 'newBillForm';
       this.AMOUNT_INPUT_NAME = 'newBillAmountIn';
 
       this.nameInputValue = '';
       this.amountInputValue = null;
       this.amountDisplayValue = null;
+      this.oneOrMoreBillersInputValue = 'one';
+      this.oneBillerNameInputValue = '';
+      this.oneBillerTypeOrSelectNameInputValue = 'type';
 
       this.isButtonDisabled = true;
       this.hasSuccess = false;
       this.isInputDisabled = false;
-      this.newBill = null;
+      this.newBill = {
+        name: undefined,
+        amount: null
+
+      };
+      this.completeNewBill = null;
+
+      this.updateInputValue = (propertyName, newValue) => {
+        console.log(newValue);
+        this[propertyName] = newValue;
+        console.log(propertyName)
+      }
+
+      this.test = () => {
+        console.log(this.oneOrMoreBillersInputValue)
+      }
+
+      this.test2 = () => {
+        console.log(this.oneBillerNameInputValue)
+      }
 
       this.updateButtonDisable = () => {
         this.isButtonDisabled = this.nameInputValue === '';
       };
 
       this.updateAmountDisplay = () => {
-        if (!this.amountInputValue && this.amountInputValue !== 0) return this.amountDisplayValue = null;
-        else this.amountDisplayValue = this.amountInputValue.toFixed(2);
+        if (!this.amountInputValue && this.amountInputValue !== 0) {
+          this.newBill.amount = null;
+          this.amountDisplayValue = null;
+        }
+        else if (this.amountInputValue < 0) {
+          this.newBill.amount = null;
+          this.amountDisplayValue = 'negative';
+        }
+        else {
+          this.amountDisplayValue = this.amountInputValue.toFixed(2);
+          this.newBill.amount = parseFloat(this.amountDisplayValue);
+        }
       }
 
       this.submitForm = () => {
         this.disableForm();
-        this.addBill({ name: this.nameInputValue })
+        console.log(this.newBill);
+        this.addBill(this.newBill)
           .then(newBill => {
+            console.log(newBill)
             this.hasSuccess = true;
-            this.newBill = newBill;
+            this.completeNewBill = newBill;
             // Updates view.
               // source: https://www.jeffryhouser.com/index.cfm/2014/6/2/How-do-I-run-code-when-a-variable-changes-with-angularjs
             $scope.$apply();

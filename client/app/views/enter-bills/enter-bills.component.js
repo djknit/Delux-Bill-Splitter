@@ -92,6 +92,7 @@ angular
         }
       );
 
+      // "agent" is the term I am using to describe billers (entities to which bills are owed or have been paid to)
       this.addAgent = newAgentName => {
         return this.addEntity(newAgentName, true);
       }

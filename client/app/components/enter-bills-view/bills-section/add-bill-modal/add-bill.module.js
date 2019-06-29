@@ -1,4 +1,9 @@
 'use strict';
 
 angular
-  .module('addBillModal', []);
+  .module('addBillModal',
+    [
+      'billFormAmount',
+      'billFormBillName'
+    ]
+  );

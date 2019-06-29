@@ -1,9 +1,12 @@
-#newBillForm .form-group > label {
+#newBillForm .form-group > label,
+#newBillForm fieldset > legend {
   font-weight: 500;
   display: block;
+  font-size: 1rem;
 }
 
-#newBillForm .form-group > label > span.normal {
+#newBillForm .form-group > label > span.normal,
+#newBillForm fieldset > legend > span.normal {
   font-weight: 400;
 }
 
@@ -30,7 +33,19 @@
   color: #495057;
   background-clip: padding-box;
   /* border: 1px solid #ced4da; */
-  border-radius: .25rem;
+  /* border-radius: .25rem; */
+}
+
+#no-negative-amount-message {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  padding: .375rem .75rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #dc3545;
 }
 
 /* source: https://css-tricks.com/snippets/css/turn-off-number-input-spinners/ */

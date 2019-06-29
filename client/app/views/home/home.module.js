@@ -2,5 +2,6 @@
 
 angular
   .module('homeView', [
-    'ngRoute'
+    'ngRoute',
+    'core.currentRoute'
   ]);
