@@ -19,37 +19,24 @@
         input-value="$ctrl.nameInputValue"
         report-change="$ctrl.updateInputValue"
         property-name="nameInputValue"
-      ></bill-form-bill-name>
-
+      >
+      </bill-form-bill-name>
       <hr />
-      <div class="form-group amount">
-        <label for="{{$ctrl.AMOUNT_INPUT_NAME}}">
-          Bill Total <span class="normal">(US Dollars)</span>
-        </label>
-        <input
-          type="number"
-          class="form-control"
-          id="{{$ctrl.AMOUNT_INPUT_NAME}}"
-          ng-model="$ctrl.amountInputValue"
-          ng-disabled="$ctrl.isInputDisabled"
-          ng-change="$ctrl.updateAmountDisplay()"
-        />
-        <div
-          ng-if="$ctrl.amountDisplayValue !== null && $ctrl.amountDisplayValue !== 'negative'"
-          id="formatted-amount-display"
-        >
-          $ {{$ctrl.amountDisplayValue}}
-        </div>
-        <div
-          ng-if="$ctrl.amountDisplayValue === 'negative'"
-          id="no-negative-amount-message"
-        >
-          Negative values are not allowed
-        </div>
-      </div>
-
+      <bill-form-amount
+        input-name="newBillAmountIn"
+        input-value="$ctrl.amountInputValue.raw"
+        report-change="$ctrl.updateInputValue"
+        property-name="amountInputValue"
+      >
+      </bill-form-amount>
       <hr />
-      <fieldset id="biller-fieldset">
+      <bill-form-billers
+        input-value="$ctrl.billersInputValue"
+        report-change="$ctrl.updateInputValue"
+        property-name="billersInputValue"
+      >
+      </bill-form-billers>
+      <!-- <fieldset id="biller-fieldset">
         <legend>
           Biller <span class="normal">(Who is this bill paid to?)</span>
         </legend>
@@ -127,7 +114,7 @@
         <fieldset ng-if="$ctrl.oneOrMoreBillersInputValue === 'more'">
 
         </fieldset>
-      </fieldset>
+      </fieldset> -->
 
       <hr />
       <fieldset id="responsible-participants-fieldset">

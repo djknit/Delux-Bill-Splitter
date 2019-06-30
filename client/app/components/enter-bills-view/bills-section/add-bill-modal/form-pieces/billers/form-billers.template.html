@@ -1,0 +1,148 @@
+<link
+  rel="stylesheet"
+  href="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/form-billers.css"
+/>
+
+<fieldset id="biller-fieldset">
+  <legend>
+    Biller <span class="normal">(Who is this bill paid to?)</span>
+  </legend>
+  
+  <div class="form-group">
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="one-or-more-billers-in"
+        id="one-or-more-billers-in_one"
+        value="one"
+        ng-model="$ctrl.inputValue.oneOrMoreBillers"
+        ng-change="$ctrl.handleChange()"
+      />
+      <label class="form-check-label" for="one-or-more-billers-in_one">One biller</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="one-or-more-billers-in"
+        id="one-or-more-billers-in_more"
+        value="more"
+        ng-model="$ctrl.inputValue.oneOrMoreBillers"
+        ng-change="$ctrl.handleChange()"
+      />
+      <label class="form-check-label" for="one-or-more-billers-in_more">
+        Multiple billers
+      </label>
+    </div>
+  </div>
+  <hr />
+  
+  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'one'" class="biller-names">
+    <legend>Biller Name</legend>
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="one-biller-type-or-select-in"
+          id="one-biller-type-or-select-in_type"
+          value="type"
+          ng-model="$ctrl.inputValue.billerSingle.typeOrSelect"
+          ng-change="$ctrl.handleChange()"
+        />
+        <label class="form-check-label" for="one-biller-type-or-select-in_type">
+          Enter a new name
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="one-biller-type-or-select-in"
+          id="one-biller-type-or-select-in_select"
+          value="select"
+          ng-model="$ctrl.inputValue.billerSingle.typeOrSelect"
+          ng-change="$ctrl.handleChange()"
+        />
+        <label class="form-check-label" for="one-biller-type-or-select-in_select">
+          Select from billers already used in this list
+        </label>
+      </div>
+    </div>
+    
+    <div
+      class="form-group"
+      ng-if="$ctrl.inputValue.billerSingle.typeOrSelect === 'type'"
+    >
+      <input
+        class="form-control"
+        type="text"
+        id="one-biller-name-in"
+        placeholder="Name of business or person the bill is paid to..."
+        ng-model="$ctrl.inputValue.billerSingle.typed"
+        ng-change="$ctrl.handleChange()"
+        aria-label="Biller name"
+      />
+    </div>
+  </fieldset>
+  
+  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'more'" class="biller-names">
+    
+    <fieldset ng-repeat="biller in $ctrl.inputValue.billersMultiple">
+      <legend>Biller {{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}</legend>
+      <div class="form-group">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="biller-{{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}-type-or-select-in"
+            id="biller-{{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}-type-or-select-in_type"
+            value="type"
+            ng-model="biller.typeOrSelect"
+            ng-change="$ctrl.handleChange()"
+          />
+          <label
+            class="form-check-label"
+            for="biller-{{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}-type-or-select-in_type"
+          >
+            Enter a new name
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="biller-{{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}-type-or-select-in"
+            id="biller-{{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}-type-or-select-in_select"
+            value="select"
+            ng-model="biller.typeOrSelect"
+            ng-change="$ctrl.handleChange()"
+          />
+          <label
+            class="form-check-label"
+            for="biller-{{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}-type-or-select-in_select"
+          >
+            Select from billers already used in this list
+          </label>
+        </div>
+      </div>
+      
+      <div
+        class="form-group"
+        ng-if="$ctrl.inputValue.billerSingle.typeOrSelect === 'type'"
+      >
+        <input
+          class="form-control"
+          type="text"
+          id="biller-{{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}}-name-in"
+          placeholder="Name of business or person the bill is paid to..."
+          ng-model="biller.typed"
+          ng-change="$ctrl.handleChange()"
+          aria-label="Biller {{$ctrl.inputValue.billersMultiple.indexOf(biller) + 1}} Name"
+        />
+      </div>
+    </fieldset>
+
+  </fieldset>
+</fieldset>

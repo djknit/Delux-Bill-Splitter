@@ -11,11 +11,8 @@ angular
       propertyName: '@'
     },
     controller: function billFormBillNameCtrl() {
-      this._inputValue = '';
       this.handleChange = () => {
-        console.log('change')
-        console.log(this._inputValue)
-        this.reportChange(this.propertyName, this._inputValue)
+        this.reportChange(this.propertyName, this.inputValue);
       }
     }
   });

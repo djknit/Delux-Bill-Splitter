@@ -14,29 +14,31 @@ angular
     },
     controller: ['$scope', function addBillModalCtrl($scope) {
       this.FORM_NAME = 'newBillForm';
-      this.AMOUNT_INPUT_NAME = 'newBillAmountIn';
 
       this.nameInputValue = '';
-      this.amountInputValue = null;
-      this.amountDisplayValue = null;
-      this.oneOrMoreBillersInputValue = 'one';
-      this.oneBillerNameInputValue = '';
-      this.oneBillerTypeOrSelectNameInputValue = 'type';
+      this.amountInputValue = {
+        raw: null,
+        rounded: null
+      }
+      this.billersInputValue = {
+        oneOrMoreBillers: 'one',
+        billersMultiple: [],
+        billerSingle: {
+          typeOrSelect: 'type',
+          selected: null,
+          typed: ''
+        }
+      }
 
       this.isButtonDisabled = true;
       this.hasSuccess = false;
       this.isInputDisabled = false;
-      this.newBill = {
-        name: undefined,
-        amount: null
-
-      };
       this.completeNewBill = null;
 
       this.updateInputValue = (propertyName, newValue) => {
-        console.log(newValue);
         this[propertyName] = newValue;
         console.log(propertyName)
+        console.log(this[propertyName]);
       }
 
       this.test = () => {
@@ -50,21 +52,6 @@ angular
       this.updateButtonDisable = () => {
         this.isButtonDisabled = this.nameInputValue === '';
       };
-
-      this.updateAmountDisplay = () => {
-        if (!this.amountInputValue && this.amountInputValue !== 0) {
-          this.newBill.amount = null;
-          this.amountDisplayValue = null;
-        }
-        else if (this.amountInputValue < 0) {
-          this.newBill.amount = null;
-          this.amountDisplayValue = 'negative';
-        }
-        else {
-          this.amountDisplayValue = this.amountInputValue.toFixed(2);
-          this.newBill.amount = parseFloat(this.amountDisplayValue);
-        }
-      }
 
       this.submitForm = () => {
         this.disableForm();
@@ -95,7 +82,7 @@ angular
 
       this.addAnotherBill = () => {
         this.reset();
-        this.focusInput();
+        // this.focusInput();
       }
     }]
   });

@@ -10,6 +10,7 @@
   font-weight: 400;
 }
 
+/* Bill Total section */
 .form-group.amount {
   position: relative;
 }
@@ -53,4 +54,33 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+/* Biller section */
+#biller-fieldset > hr {
+  margin: 5px 0 5px 15px;
+}
+
+#biller-fieldset > .form-group {
+  margin-bottom: 10px;
+}
+
+#newBillForm fieldset.biller-names {
+  padding-left: 15px;
+  font-size: .85rem;
+}
+
+#newBillForm fieldset.biller-names > legend,
+#newBillForm fieldset.biller-names > fieldset > legend {
+  margin-bottom: 5px;
+  font-size: .9rem;
+}
+
+#newBillForm fieldset.biller-names > .form-group,
+#newBillForm fieldset.biller-names > fieldset > .form-group {
+  margin-bottom: 5px;
+}
+
+#newBillForm fieldset.biller-names input.form-control {
+  font-size: .85rem;
 }

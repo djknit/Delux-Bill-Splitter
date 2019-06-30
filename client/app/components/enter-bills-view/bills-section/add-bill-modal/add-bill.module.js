@@ -4,6 +4,9 @@ angular
   .module('addBillModal',
     [
       'billFormAmount',
-      'billFormBillName'
+      'billFormBillName',
+      'billFormBillers',
+      'billFormIsPaid',
+      'billFormResponsibility'
     ]
   );

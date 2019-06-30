@@ -5,10 +5,9 @@
   <input
     type="number"
     class="form-control"
-    id="{{$ctrl.AMOUNT_INPUT_NAME}}"
-    ng-model="$ctrl.amountInputValue"
-    ng-disabled="$ctrl.isInputDisabled"
-    ng-change="$ctrl.updateAmountDisplay()"
+    id="{{$ctrl.inputName}}"
+    ng-model="$ctrl.inputValue"
+    ng-change="$ctrl.handleChange()"
   />
   <div
     ng-if="$ctrl.amountDisplayValue !== null && $ctrl.amountDisplayValue !== 'negative'"
