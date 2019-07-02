@@ -26,7 +26,8 @@ angular
         billerSingle: {
           typeOrSelect: 'type',
           selected: null,
-          typed: ''
+          typed: '',
+          amount: null
         }
       }
 

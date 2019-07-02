@@ -81,6 +81,48 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 5px;
 }
 
-#newBillForm fieldset.biller-names input.form-control {
+#newBillForm fieldset.biller-names input.form-control,
+#newBillForm .form-group.form-inline > label {
   font-size: .85rem;
+}
+
+#newBillForm .biller-names > fieldset > .form-group .biller-multiple {
+  font-size: .8rem;
+}
+#newBillForm .biller-names > fieldset > .form-group input.biller-multiple[type="text"] {
+  padding: 3px 6px;
+}
+
+.form-group.mult-billers-name {
+  display: flex;
+}
+.form-group.mult-billers-name > label,
+.form-group.mult-billers-amount > label {
+  padding-right: 5px;
+}
+.form-group.mult-billers-name > input {
+  flex-grow: 1;
+}
+
+.biller-amount-display {
+  vertical-align: bottom;
+  display: inline-block;
+  padding-left: 8px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #495057;
+  background-clip: padding-box;
+}
+.biller-no-negative-amount-message {
+  display: inline-block;
+  position: absolute;
+  padding-left: 8px;
+  font-size: .85rem;
+  line-height: 1.2;
+  color: #dc3545;
+}
+
+.mult-billers-name-separator {
+  margin: 10px 0 5px;
 }
