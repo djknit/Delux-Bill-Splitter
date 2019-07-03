@@ -40,7 +40,7 @@
   
   <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'one'" class="biller-names">
     <legend>Biller Name</legend>
-    <div class="form-group">
+    <div class="form-group" ng-if="false">
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
@@ -89,9 +89,12 @@
   
   <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'more'" class="biller-names">
 
-    <fieldset ng-repeat="biller in $ctrl.inputValue.billersMultiple">
+    <fieldset ng-repeat="biller in $ctrl.inputValue.billersMultiple" class="biller-multiple">
       <legend>Biller {{$index + 1}}</legend>
-      <div class="form-group">
+      <button class="remove-biller btn btn-danger" ng-click="$ctrl.removeBillerInput($index)">
+        - Remove
+      </button>
+      <div class="form-group" ng-if="false">
         <div class="form-check form-check-inline">
           <input
             class="form-check-input biller-multiple"
@@ -169,8 +172,12 @@
         </div>
       </div>
 
-      <hr ng-if="!$last"  class="mult-billers-name-separator"/>
+      <hr class="mult-billers-name-separator"/>
     </fieldset>
+
+    <button class="btn btn-primary" id="add-biller-btn" ng-click="$ctrl.addBillerInput(1)">
+      + Add Biller
+    </button>
 
   </fieldset>
 </fieldset>

@@ -38,6 +38,7 @@ angular
         this.reportChange(this.propertyName, this.inputValue);
       }
 
+      // adds n new biller inputs
       this.addBillerInput = (n) => {
         if (!n) n = 1;
         for (let i = 0; i < n; i++) {
@@ -50,6 +51,11 @@ angular
             amountDisplay: null
           });
         }
+      }
+
+      this.removeBillerInput = (index) => {
+        this.inputValue.billersMultiple.splice(index, 1);
+        this.handleChange();
       }
 
       this.setRoundedAndDisplayAmountValues = (index) => {

@@ -86,6 +86,17 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: .85rem;
 }
 
+#newBillForm .biller-names > .biller-multiple {
+  position: relative;
+}
+#newBillForm .biller-multiple > .remove-biller {
+  padding: 1px 3px;
+  font-size: .7rem;
+  position: absolute;
+  top: 2px;
+  right: 0;
+}
+
 #newBillForm .biller-names > fieldset > .form-group .biller-multiple {
   font-size: .8rem;
 }
@@ -125,4 +136,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 .mult-billers-name-separator {
   margin: 10px 0 5px;
+}
+
+#add-biller-btn {
+  font-size: .85rem;
+  padding: .3rem .6rem;
 }

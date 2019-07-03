@@ -5,6 +5,7 @@
 ## Contents
 * [Links](#links)
 * [Project Goals](#project-goals)
+* [Action Plan](#action-plan)
 * [Project Features](#project-features)
 * [Technologies Used](#technologies-used)
 * [Instructions for Use](#instructions-for-use)
@@ -39,6 +40,27 @@
   * When entering how to split responsiblity for bill,
     * Allow even splitting of remaining portion at any time.
     * Allow user to set default splitting (evenly or by percent) for entire list.
+
+## Action Plan
+I am working to develop the basic functions on the front-end only. During this process, I will keep in mind that I plan to create a back-end and attempt to organize the data in a way that will make it easy to transfer state between the front and back ends.
+
+Currently, I am working on the "Enter Bills" page which is where the most important logic necessary for the MVP is contained.
+
+* [x] Create basic layout of page
+* [x] Create functionality to add and remove participants from the list.
+* [ ] Create functionality to add bill to list
+  * [x] Create form (in modal)
+  * [x] Bill Name section (design and implement with logic including updating state)
+  * [x] Bill Total section
+  * [x] Billers section
+  * [ ] Responsible participants section
+  * [ ] Consider looking for ways to remove repetition in form by creating more components and/or reorganizing components
+  * [ ] isPaid/paidBy section
+* [ ] Create remove bill functionality
+* [ ] Add logic to calculate bills
+* [ ] Design results display
+
+Once the above steps are complete, I will deploy the front-end and begin work on the back-end.
 
 ## Project Features
 (Coming soon...)
