@@ -82,8 +82,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 #newBillForm fieldset.biller-names input.form-control,
+#newBillForm fieldset.biller-names select.form-control,
 #newBillForm .form-group.form-inline > label {
   font-size: .85rem;
+}
+
+#newBillForm select.form-control > option[disabled] {
+  color: #6c757d;
 }
 
 #newBillForm .biller-names > .biller-multiple {
@@ -111,7 +116,8 @@ input[type=number]::-webkit-outer-spin-button {
 .form-group.mult-billers-amount > label {
   padding-right: 5px;
 }
-.form-group.mult-billers-name > input {
+.form-group.mult-billers-name > input,
+.form-group.mult-billers-name > select {
   flex-grow: 1;
 }
 

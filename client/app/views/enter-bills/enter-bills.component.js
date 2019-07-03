@@ -8,7 +8,11 @@ angular
       
       this.participants = [];
       this.bills = [];
-      this.agents = [];
+      this.agents = [
+        { name: 'test', id: 1 },
+        { name: 'dave dave', id: 2 },
+        { name: 'Dillon\'s', id: 3 }
+      ];
 
       this.nextParticipantId = 1;
       this.nextBillId = 1;
@@ -95,6 +99,6 @@ angular
       // "agent" is the term I am using to describe billers (entities to which bills are owed or have been paid to)
       this.addAgent = newAgentName => {
         return this.addEntity(newAgentName, true);
-      }
+      };
     }
   });

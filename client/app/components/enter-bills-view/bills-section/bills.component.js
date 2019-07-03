@@ -9,7 +9,8 @@ angular
       addBill: '<',
       removebill: '<',
       participants: '<',
-      agents: '<'
+      agents: '<',
+      addAgent: '<'
     },
     transclude: false,
     controller: function billsSectionCtrl() {

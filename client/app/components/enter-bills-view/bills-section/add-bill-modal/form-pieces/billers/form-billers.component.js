@@ -7,7 +7,8 @@ angular
     bindings: {
       inputValue: '<',
       reportChange: '<',
-      propertyName: '@'
+      propertyName: '@',
+      agents: '<'
     },
     controller: function billFormBillersCtrl() {
       this.$onInit = () => {
