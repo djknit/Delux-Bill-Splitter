@@ -54,13 +54,23 @@ Currently, I am working on the "Enter Bills" page which is where the most import
   * [x] Bill Total section
   * [x] Billers section
   * [ ] Responsible participants section
-  * [ ] Consider looking for ways to remove repetition in form by creating more components and/or reorganizing components
   * [ ] isPaid/paidBy section
 * [ ] Create remove bill functionality
 * [ ] Add logic to calculate bills
 * [ ] Design results display
 
-Once the above steps are complete, I will deploy the front-end and begin work on the back-end.
+Try to fix the following bugs:
+
+* [ ] `alert.css` appears to not be working
+
+Consider the following possible improvements:
+
+* [ ] Look for ways to remove repetition in form by creating more components and/or reorganizing components
+* [ ] Create more services to handle data central to the app.
+  * This should cut down on the amount of data that needs to be passed between components with bindings.
+  * It should also make it easier to connect w/ api once back end is added.
+
+Once the above steps are complete, I will begin work on the back-end.
 
 ## Project Features
 (Coming soon...)
