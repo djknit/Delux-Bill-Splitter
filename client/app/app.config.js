@@ -5,7 +5,8 @@ angular
   .config([
     '$locationProvider',
     '$routeProvider',
-    function config($locationProvider, $routeProvider) {
+    '$compileProvider',
+    function config($locationProvider, $routeProvider, $compileProvider) {
       $locationProvider.hashPrefix('!');
 
       $routeProvider
@@ -16,5 +17,8 @@ angular
           template: '<enter-bills-view></enter-bills-view>'
         })
         .otherwise('/');
+
+      // turn to false before production build for performance boost
+      $compileProvider.debugInfoEnabled(true);
     }
   ]);
