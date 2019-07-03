@@ -12,7 +12,8 @@
 * [Developer](#developer)
 
 ## Links
-* GitHub repository: [github.com/djknit/Bill-Splitter](https://github.com/djknit/Delux-Bill-Splitter)
+* Deployed page: [delux-bill-splitter.herokuapp.com](https://delux-bill-splitter.herokuapp.com/#!/)
+* GitHub repository: [github.com/djknit/Delux-Bill-Splitter](https://github.com/djknit/Delux-Bill-Splitter)
 
 ## Project Goals
 * This app aims to be an easy tool to split any bill or group of bills any way between any number of people.
@@ -68,7 +69,12 @@ Consider the following possible improvements:
 * [ ] Look for ways to remove repetition in form by creating more components and/or reorganizing components
 * [ ] Create more services to handle data central to the app.
   * This should cut down on the amount of data that needs to be passed between components with bindings.
-  * It should also make it easier to connect w/ api once back end is added.
+  * It should also make it easier to connect with API once back end is added.
+* [ ] Improve UX of Add Bill form.
+  * [ ] Disable "Biller", "Responsible Participants", and "Has this bill been paid?" sections until Bill Total has been set.
+  * [ ] Consider breaking form in to pieces which would be displayed one at a time in the modal with butttons to move forwards and backwards through the steps.
+  * [ ] Add helper text by fields to explain problems.
+  * [ ] Consider adding more instructions/helper text, possibly using Bootstrap tooltips.
 
 Once the above steps are complete, I will begin work on the back-end.
 
