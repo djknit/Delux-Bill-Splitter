@@ -37,99 +37,15 @@
         agents="$ctrl.agents"
       >
       </bill-form-billers>
-      <!-- <fieldset id="biller-fieldset">
-        <legend>
-          Biller <span class="normal">(Who is this bill paid to?)</span>
-        </legend>
-        <div class="form-group">
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="one-or-more-billers-in"
-              id="one-or-more-billers-in_one"
-              value="one"
-              ng-model="$ctrl.oneOrMoreBillersInputValue"
-              ng-change="$ctrl.test()"
-            />
-            <label class="form-check-label" for="one-or-more-billers-in_one">One biller</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="one-or-more-billers-in"
-              id="one-or-more-billers-in_more"
-              value="more"
-              ng-model="$ctrl.oneOrMoreBillersInputValue"
-              ng-change="$ctrl.test()"
-            />
-            <label class="form-check-label" for="one-or-more-billers-in_more">
-              Multiple billers
-            </label>
-          </div>
-        </div>
-        <fieldset ng-if="$ctrl.oneOrMoreBillersInputValue === 'one'">
-          <div class="form-group">
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="one-biller-type-or-select-in"
-                id="one-biller-type-or-select-in_type"
-                value="type"
-                ng-model="$ctrl.oneBillerTypeOrSelectNameInputValue"
-                ng-change="$ctrl.test2()"
-              />
-              <label class="form-check-label" for="one-biller-type-or-select-in_type">
-                Enter a new name
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="one-biller-type-or-select-in"
-                id="one-biller-type-or-select-in_select"
-                value="select"
-                ng-model="$ctrl.oneBillerTypeOrSelectNameInputValue"
-                ng-change="$ctrl.test2()"
-              />
-              <label class="form-check-label" for="one-biller-type-or-select-in_select">
-                
-              </label>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="one-biller-name-in"></label>
-            <input
-              class="form-control"
-              type="text"
-              id="one-biller-name-in"
-              placeholder="Enter a name for the business or person the bill is paid to..."
-              ng-model="$ctrl.oneBillerNameInputValue"
-              ng-change="$ctrl.test2()"
-            />
-          </div>
-        </fieldset>
-        <fieldset ng-if="$ctrl.oneOrMoreBillersInputValue === 'more'">
-
-        </fieldset>
-      </fieldset> -->
-
       <hr />
-      <fieldset id="responsible-participants-fieldset">
-        <legend>
-          Responsible Participants
-          <span class="normal">
-            (How do you want to split the bill between the participants?)
-          </span>
-        </legend>
-        <div class="form-group">
-          
-        </div>
-      </fieldset>
-      
+      <bill-form-responsibility
+        input-value="$ctrl.responsibilityInputValue"
+        report-change="$ctrl.updateInputValue"
+        property-name="responsibilityInputValue"
+        participants="$ctrl.participants"
+        bill-total-value="$ctrl.amountInputValue.rounded"
+      >
+      </bill-form-responsibility>
       <hr />
       <fieldset id="is-paid-fieldset">
         <legend>

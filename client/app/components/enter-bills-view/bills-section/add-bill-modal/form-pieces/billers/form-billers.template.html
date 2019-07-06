@@ -38,7 +38,7 @@
   </div>
   <hr />
   
-  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'one'" class="biller-names">
+  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'one'" class="biller-names form-subsection">
     <legend>Biller Name</legend>
     <div class="form-group" ng-if="$ctrl.agents.length > 0">
       <div class="form-check form-check-inline">
@@ -108,7 +108,7 @@
     </div>
   </fieldset>
   
-  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'more'" class="biller-names">
+  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'more'" class="biller-names form-subsection">
 
     <fieldset ng-repeat="biller in $ctrl.inputValue.billersMultiple" class="biller-multiple">
       <legend>Biller {{$index + 1}}</legend>

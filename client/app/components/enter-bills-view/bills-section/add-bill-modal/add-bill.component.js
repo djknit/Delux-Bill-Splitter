@@ -15,39 +15,76 @@ angular
     controller: ['$scope', function addBillModalCtrl($scope) {
       this.FORM_NAME = 'newBillForm';
 
-      this.nameInputValue = '';
-      this.amountInputValue = {
-        raw: null,
-        rounded: null
-      }
-      this.billersInputValue = {
-        oneOrMoreBillers: 'one',
-        billersMultiple: [],
-        billerSingle: {
-          typeOrSelect: 'type',
-          selected: null,
-          typed: '',
-          amount: null
-        }
-      }
+      this.resetForm = () => {
+        this.isButtonDisabled = true;
+        this.hasSuccess = false;
+        this.hasProblem = false;
 
-      this.isButtonDisabled = true;
-      this.hasSuccess = false;
-      this.isInputDisabled = false;
-      this.completeNewBill = null;
+        this.nameInputValue = '';
+        this.amountInputValue = {
+          raw: null,
+          rounded: null
+        };
+        this.billersInputValue = {
+          oneOrMoreBillers: 'one',
+          billersMultiple: [],
+          billerSingle: {
+            typeOrSelect: 'type',
+            selected: null,
+            typed: ''
+          }
+        };
+        this.addMultBillerInput(2);
+        this.responsibilityInputValue = {
+          splittingMethod: 'evenlyBetweenAll',
+          evenlyBetweenSomeParticipants: [], // Holds list of participants for splitting option of "evenly between some participants"
+          allEvenlyAmountPerPerson: null,
+          someEvenlyAmountPerPerson: null,
+          individually: [] // Holds list of input groups for assigning responsibility individually (most customizable option)
+        };
+      };
+      // The above function (this.resetForm()) is called at the end of this constructor.
+
+      // adds n new biller inputs to Multiple Billers section
+      this.addMultBillerInput = (n) => {
+        if (!n) n = 1;
+        for (let i = 0; i < n; i++) {
+          this.billersInputValue.billersMultiple.push({
+            typeOrSelect: 'type',
+            selected: null,
+            typed: '',
+            amount: null,
+            roundedAmount: null,
+            amountDisplay: null
+          });
+        }
+      };
+
+      this.removeBillerInput = (index) => {
+        this.inputValue.billersMultiple.splice(index, 1);
+        this.handleChange();
+      }
 
       this.updateInputValue = (propertyName, newValue) => {
         this[propertyName] = newValue;
         console.log(propertyName)
         console.log(this[propertyName]);
-      }
+      };
 
-      this.test = () => {
-        console.log(this.oneOrMoreBillersInputValue)
-      }
-
-      this.test2 = () => {
-        console.log(this.oneBillerNameInputValue)
+      this.setRoundedAndDisplayAmountValues = (index) => {
+        const biller = this.inputValue.billersMultiple[index];
+        if (!biller.amount && biller.amount !== 0) {
+          biller.roundedAmount = null;
+          biller.amountDisplay = null;
+        }
+        else if (this.inputValue < 0) {
+          biller.roundedAmount = null;
+          biller.amountDisplay = 'negative';
+        }
+        else {
+          biller.amountDisplay = biller.amount.toFixed(2);
+          biller.roundedAmount = parseFloat(biller.amountDisplay);
+        }
       }
 
       this.updateButtonDisable = () => {
@@ -75,15 +112,11 @@ angular
           = reverse ? false : true;
       };
 
-      this.reset = () => {
-        this.nameInputValue = '';
-        this.hasSuccess = false;
-        this.disableForm(false);
-      };
-
       this.addAnotherBill = () => {
         this.reset();
         // this.focusInput();
       }
+
+      this.resetForm();
     }]
   });

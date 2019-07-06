@@ -6,6 +6,67 @@
     </span>
   </legend>
   <div class="form-group">
-    
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="splitting-method-in"
+        id="splitting-method-in_evenlyBetweenAll"
+        value="evenlyBetweenAll"
+        ng-model="$ctrl.inputValue.splittingMethod"
+        ng-change="$ctrl.handleChange()"
+      />
+      <label class="form-check-label" for="splitting-method-in_evenlyBetweenAll">
+        Evenly between all participants
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="splitting-method-in"
+        id="splitting-method-in_evenlyBetweenSome"
+        value="evenlyBetweenSome"
+        ng-model="$ctrl.inputValue.splittingMethod"
+        ng-change="$ctrl.handleChange()"
+      />
+      <label class="form-check-label" for="splitting-method-in_evenlyBetweenSome">
+        Evenly between some participants
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="splitting-method-in"
+        id="splitting-method-in_individually"
+        value="individually"
+        ng-model="$ctrl.inputValue.splittingMethod"
+        ng-change="$ctrl.handleChange()"
+      />
+      <label class="form-check-label" for="splitting-method-in_individually">
+        Other (assign responsibility individually)
+      </label>
+    </div>
   </div>
+  <hr />
+
+  <div
+    ng-if="$ctrl.inputValue.splittingMethod === 'evenlyBetweenAll'"
+    class="responsible-participant-names form-subsection"
+  >
+
+  </div>
+  <fieldset
+    ng-if="$ctrl.inputValue.splittingMethod === 'evenlyBetweenSome'"
+    class="responsible-participant-names form-subsection"
+  >
+test2
+  </fieldset>
+  <fieldset
+    ng-if="$ctrl.inputValue.splittingMethod === 'individually'"
+    class="responsible-participant-names form-subsection"
+  >
+test3
+  </fieldset>
 </fieldset>
