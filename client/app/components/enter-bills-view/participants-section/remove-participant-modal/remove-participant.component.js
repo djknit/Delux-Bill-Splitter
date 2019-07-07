@@ -6,11 +6,10 @@ angular
     templateUrl: 'components/enter-bills-view/participants-section/remove-participant-modal/remove-participant.template.html',
     bindings: {
       modalName: '@',
-      participant: '<',
-      removeParticipant: '<'
+      participant: '<'
     },
-    controller: ['$scope', 
-      function removeParticipantModalCtrl($scope) {
+    controller: ['BillsList', '$scope', 
+      function removeParticipantModalCtrl(BillsList, $scope) {
 
         this.isButtonDisabled = false;
         this.hasSuccess = false;
@@ -24,7 +23,7 @@ angular
         };
 
         this.executeRemove = id => {
-          this.removeParticipant(id || this.participant.id)
+          BillsList.removeParticipant(id || this.participant.id)
             .then(removedParticipantName => {
               this.hasSuccess = true;
               this.removedParticipantName = removedParticipantName;
