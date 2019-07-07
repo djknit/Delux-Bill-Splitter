@@ -11,8 +11,8 @@ angular
         this.NAME_INPUT_NAME = 'newParticipantNameIn';
 
         this.participantToRemove = null;
+        
         this.participants = BillsList.participants;
-        console.log(this.participants)
         BillsList.subscribeToParticipants($scope, (participants) => {
           this.participants = participants;
         });
