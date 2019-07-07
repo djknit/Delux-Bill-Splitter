@@ -8,10 +8,12 @@ angular
       inputValue: '<',
       reportChange: '<',
       propertyName: '@',
-      agents: '<'
+      agents: '<',
+      addBillerInput: '<',
+      removeBillerInput: '<'
     },
     controller: function billFormBillersCtrl() {
-      this.handleChange = (index) => {
+      this.handleChange = () => {
         this.reportChange(this.propertyName, this.inputValue);
       }
     }

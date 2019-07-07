@@ -21,10 +21,7 @@ angular
         this.hasProblem = false;
 
         this.nameInputValue = '';
-        this.amountInputValue = {
-          raw: null,
-          rounded: null
-        };
+        this.amountInputValue = generateAmountInputValueObj();
         this.billersInputValue = {
           oneOrMoreBillers: 'one',
           billersMultiple: [],
@@ -45,6 +42,32 @@ angular
       };
       // The above function (this.resetForm()) is called at the end of this constructor.
 
+      function generateAmountInputValueObj() {
+        return {
+          raw: null,
+          rounded: null,
+          display: null,
+          set raw(value) {
+            this._raw = value;
+            if (!value && value !== 0) {
+              this.rounded = null;
+              this.display = null;
+            }
+            else if (value < 0) {
+              this.rounded = null;
+              this.display = 'negative';
+            }
+            else {
+              this.display = value.toFixed(2);
+              this.rounded = parseFloat(this.display);
+            }
+          },
+          get raw() {
+            return this._raw;
+          }
+        };
+      }
+
       // adds n new biller inputs to Multiple Billers section
       this.addMultBillerInput = (n) => {
         if (!n) n = 1;
@@ -53,42 +76,20 @@ angular
             typeOrSelect: 'type',
             selected: null,
             typed: '',
-            amount: null,
-            roundedAmount: null,
-            amountDisplay: null
+            amount: generateAmountInputValueObj()
           });
         }
       };
 
       this.removeBillerInput = (index) => {
-        this.inputValue.billersMultiple.splice(index, 1);
-        this.handleChange();
+        this.billersInputValue.billersMultiple.splice(index, 1);
+        // this.handleChange();
       }
 
       this.updateInputValue = (propertyName, newValue) => {
         this[propertyName] = newValue;
         console.log(propertyName)
         console.log(this[propertyName]);
-      };
-
-      this.setRoundedAndDisplayAmountValues = (index) => {
-        const biller = this.inputValue.billersMultiple[index];
-        if (!biller.amount && biller.amount !== 0) {
-          biller.roundedAmount = null;
-          biller.amountDisplay = null;
-        }
-        else if (this.inputValue < 0) {
-          biller.roundedAmount = null;
-          biller.amountDisplay = 'negative';
-        }
-        else {
-          biller.amountDisplay = biller.amount.toFixed(2);
-          biller.roundedAmount = parseFloat(biller.amountDisplay);
-        }
-      }
-
-      this.updateButtonDisable = () => {
-        this.isButtonDisabled = this.nameInputValue === '';
       };
 
       this.submitForm = () => {

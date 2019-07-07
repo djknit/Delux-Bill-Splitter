@@ -1,8 +1,3 @@
-<link
-  rel="stylesheet"
-  href="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/form-billers.css"
-/>
-
 <fieldset id="biller-fieldset">
   <legend>
     Biller <span class="normal">(Who is this bill paid to?)</span>
@@ -198,18 +193,18 @@
           type="number"
           id="biller-{{$index + 1}}-amount-in"
           placeholder="$ paid to this biller..."
-          ng-model="biller.amount"
-          ng-change="$ctrl.handleChange($index)"
+          ng-model="biller.amount.raw"
+          ng-change="$ctrl.handleChange()"
           aria-label="Biller {{$index + 1}} Amount"
         />
         <div
-          ng-if="biller.amountDisplay !== null && biller.amountDisplay !== 'negative'"
+          ng-if="biller.amount.display !== null && biller.amount.display !== 'negative'"
           class="biller-amount-display"
         >
-          $ {{biller.amountDisplay}}
+          $ {{biller.amount.display}}
         </div>
         <div
-          ng-if="$ctrl.amountDisplayValue === 'negative'"
+          ng-if="biller.amount.display === 'negative'"
           class="biller-no-negative-amount-message"
         >
           Negative values are not allowed

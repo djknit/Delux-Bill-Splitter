@@ -1,8 +1,3 @@
-<link
-  rel="stylesheet"
-  href="components/enter-bills-view/bills-section/add-bill-modal/add-bill.css"
-/>
-
 <modal-skeleton
   modal-name="{{$ctrl.modalName}}"
   title="Add Bill"
@@ -24,7 +19,7 @@
       <hr />
       <bill-form-amount
         input-name="newBillAmountIn"
-        input-value="$ctrl.amountInputValue.raw"
+        input-value="$ctrl.amountInputValue"
         report-change="$ctrl.updateInputValue"
         property-name="amountInputValue"
       >
@@ -35,6 +30,8 @@
         report-change="$ctrl.updateInputValue"
         property-name="billersInputValue"
         agents="$ctrl.agents"
+        add-biller-input="$ctrl.addMultBillerInput"
+        remove-biller-input="$ctrl.removeBillerInput"
       >
       </bill-form-billers>
       <hr />

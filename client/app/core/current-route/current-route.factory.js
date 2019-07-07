@@ -2,7 +2,7 @@
 
 angular
   .module('core.currentRoute')
-  .factory('CurrentRoute',
+  .factory('CurrentRoute', ['$rootScope',
     function($rootScope) {
       let hash = window.location.hash;
 
@@ -10,8 +10,8 @@ angular
       // I borrowed a lot of the below code from this source.
       return {
         subscribe: function(scope, callback) {
-          var handler = $rootScope.$on('route-hash-change', () => callback(hash));
-          scope.$on('$destroy', handler);
+          const unsubscribe = $rootScope.$on('route-hash-change', () => callback(hash));
+          scope.$on('$destroy', unsubscribe);
         },
 
         notify: function(newHash) {
@@ -24,4 +24,4 @@ angular
         }
       };
     }
-  );
+  ]);

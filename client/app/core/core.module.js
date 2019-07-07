@@ -2,6 +2,7 @@
 
 angular.module('core',
   [
-    'core.currentRoute'
+    'core.currentRoute',
+    'core.billsList'
   ]
 );

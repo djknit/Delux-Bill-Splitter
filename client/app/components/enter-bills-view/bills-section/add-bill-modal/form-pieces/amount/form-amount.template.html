@@ -6,17 +6,17 @@
     type="number"
     class="form-control"
     id="{{$ctrl.inputName}}"
-    ng-model="$ctrl.inputValue"
+    ng-model="$ctrl.inputValue.raw"
     ng-change="$ctrl.handleChange()"
   />
   <div
-    ng-if="$ctrl.amountDisplayValue !== null && $ctrl.amountDisplayValue !== 'negative'"
+    ng-if="$ctrl.inputValue.display !== null && $ctrl.inputValue.display !== 'negative'"
     id="formatted-amount-display"
   >
-    $ {{$ctrl.amountDisplayValue}}
+    $ {{$ctrl.inputValue.display}}
   </div>
   <div
-    ng-if="$ctrl.amountDisplayValue === 'negative'"
+    ng-if="$ctrl.inputValue.display === 'negative'"
     id="no-negative-amount-message"
   >
     Negative values are not allowed

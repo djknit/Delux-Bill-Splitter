@@ -12,10 +12,7 @@ angular
     },
     controller: function billFormAmountCtrl() {
       this.handleChange = () => {
-        this.reportChange(this.propertyName, {
-          raw: this.inputValue,
-          rounded: this.roundedAmountValue
-        });
+        this.reportChange(this.propertyName, this.inputValue);
       };
     }
   });

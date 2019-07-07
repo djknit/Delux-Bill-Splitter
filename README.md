@@ -66,7 +66,7 @@ Currently, I am working on the "Enter Bills" page which is where the most import
 
 Try to fix the following bugs:
 
-* [ ] `alert.css` appears to not be working
+* [x] `alert.css` appears to not be working
 
 Consider the following possible improvements:
 

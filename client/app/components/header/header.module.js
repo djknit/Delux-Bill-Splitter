@@ -2,6 +2,5 @@
 
 angular
   .module('pageHeader', [
-    'ngRoute',
-    'core.currentRoute'
+    'ngRoute'
   ]);
