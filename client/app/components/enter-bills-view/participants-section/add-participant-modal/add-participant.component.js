@@ -42,7 +42,6 @@ angular
               this.hasError = true;
               this.errorMessage = (err && err.message)
                 || 'An unknown error was encountered. Please try again.';
-              this.nameInErrorMessage = (err && err.name) || null;
               this.disableForm(false);
               $scope.$apply();
             });

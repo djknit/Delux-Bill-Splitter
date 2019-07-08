@@ -13,8 +13,14 @@ angular
 
         this.billToRemove = null;
 
-        this.bills = BillsList.bills;
-        this.participants = BillsList.participants;
+        this.bills = BillsList.subscribeToBills(
+          $scope,
+          (bills) => this.bills = bills
+        );
+        this.participants = BillsList.subscribeToParticipants(
+          $scope,
+          (participants) => this.participants = participants
+        );
 
         this.openAddBillModal = () => {
           $('#' + this.ADD_BILL_MODAL_NAME).modal('show');

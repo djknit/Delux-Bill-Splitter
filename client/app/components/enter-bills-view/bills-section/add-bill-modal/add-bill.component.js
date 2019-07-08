@@ -40,6 +40,11 @@ angular
         };
         // The above function (this.resetForm()) is called at the end of this constructor.
 
+        this.agents = BillsList.subscribeToBills(
+          $scope,
+          (agents) => this.agents = agents
+        );
+
         function generateAmountInputValueObj() {
           return {
             raw: null,

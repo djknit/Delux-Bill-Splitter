@@ -32,12 +32,7 @@
 
     <alert ng-if="$ctrl.hasError" theme="danger">
       <h4>Error</h4>
-      <span ng-if="$ctrl.nameInErrorMessage">
-        {{$ctrl.errorMessage[0]}}
-        <span class="name">"{{$ctrl.nameInErrorMessage}}."</span>
-        {{$ctrl.errorMessage[1]}}
-      </span>
-      <!-- {{$ctrl.errorMessage || 'Unknown error'}} -->
+      {{$ctrl.errorMessage || 'Unknown error'}}
     </alert>
 
   </modal-body>

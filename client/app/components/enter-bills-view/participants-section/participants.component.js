@@ -12,10 +12,11 @@ angular
 
         this.participantToRemove = null;
         
-        this.participants = BillsList.participants;
-        BillsList.subscribeToParticipants($scope, (participants) => {
-          this.participants = participants;
-        });
+        // gets current participants and subscribes to be notified of changes
+        this.participants = BillsList.subscribeToParticipants(
+          $scope,
+          (participants) => this.participants = participants
+        );
 
         this.openAddParticipantModal = () => {
           $('#' + this.ADD_PRTCPNT_MODAL_NAME).modal('show');
@@ -40,7 +41,6 @@ angular
         };
 
         this.openRemoveParticipantModal = participant => {
-          console.log(participant)
           this.participantToRemove = participant;
           $('#' + this.REMOVE_PRTCPNT_MODAL_NAME).modal('show');
         };
