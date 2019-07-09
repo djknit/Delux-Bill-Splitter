@@ -3,46 +3,19 @@
   title="Add Bill"
   has-success="$ctrl.hasSuccess"
   has-danger="false"
-  reset="$ctrl.reset"
+  reset="$ctrl.resetForm"
 >
 
   <modal-body>
 
     <form ng-if="!$ctrl.hasSuccess" id="{{$ctrl.FORM_NAME}}">
-      <bill-form-bill-name
-        input-name="{{$ctrl.nameInputName}}"
-        input-value="$ctrl.nameInputValue"
-        report-change="$ctrl.updateInputValue"
-        property-name="nameInputValue"
-      >
-      </bill-form-bill-name>
+      <bill-form-bill-name input-name="{{$ctrl.nameInputName}}" />
       <hr />
-      <bill-form-amount
-        input-name="newBillAmountIn"
-        input-value="$ctrl.amountInputValue"
-        report-change="$ctrl.updateInputValue"
-        property-name="amountInputValue"
-      >
-      </bill-form-amount>
+      <bill-form-amount />
       <hr />
-      <bill-form-billers
-        input-value="$ctrl.billersInputValue"
-        report-change="$ctrl.updateInputValue"
-        property-name="billersInputValue"
-        agents="$ctrl.agents"
-        add-biller-input="$ctrl.addMultBillerInput"
-        remove-biller-input="$ctrl.removeBillerInput"
-      >
-      </bill-form-billers>
+      <bill-form-billers />
       <hr />
-      <bill-form-responsibility
-        input-value="$ctrl.responsibilityInputValue"
-        report-change="$ctrl.updateInputValue"
-        property-name="responsibilityInputValue"
-        participants="$ctrl.participants"
-        bill-total-value="$ctrl.amountInputValue.rounded"
-      >
-      </bill-form-responsibility>
+      <bill-form-responsibility />
       <hr />
       <fieldset id="is-paid-fieldset">
         <legend>
@@ -74,6 +47,7 @@
     >
       {{$ctrl.hasSuccess ? 'Add another participant' : '+Add'}}
     </button>
+    <button class="btn btn-warning" ng-click="$ctrl.resetForm()">Test</button>
   </modal-footer>
 
 </modal-skeleton>

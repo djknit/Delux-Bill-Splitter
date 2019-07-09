@@ -3,6 +3,7 @@
 angular
   .module('addBillModal',
     [
+      'billFormData',
       'billFormAmount',
       'billFormBillName',
       'billFormBillers',

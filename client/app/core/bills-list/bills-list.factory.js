@@ -71,6 +71,7 @@ angular
         );
       }
 
+      // The following object is what is exposed to other parts of the program
       return {
         get participants() {
           return participants.map(participant => Object.assign({}, participant));
@@ -81,36 +82,39 @@ angular
         get agents() {
           return agents.map(agent => Object.assign({}, agent));
         },
-        addParticipant: function(newParticipantName) {
+        addParticipant(newParticipantName) {
           let result = addEntity('participant', newParticipantName);
           $rootScope.$emit('participants-change');
           return result;
         },
-        addAgent: function(newAgentName) {
+        addAgent(newAgentName) {
           let result = addEntity('agent', newAgentName);
           $rootScope.$emit('agents-change');
           return result;
         },
-        removeParticipant: function(id) {
+        removeParticipant(id) {
           let result = removeParticipant(id);
           $rootScope.$emit('participants-change');
           return result;
         },
         // great source for notifying components of changes:
           // https://www.codelord.net/2015/05/04/angularjs-notifying-about-changes-from-services-to-controllers/
-        subscribeToParticipants: function(scope, callback) {
-          const unsubscribe = $rootScope.$on('participants-change', () => callback(this.participants));
-          scope.$on('$destroy', unsubscribe);
+        subscribeToParticipants(scope, callback) {
+          const unsubscribe = $rootScope.$on(
+            'participants-change',
+            () => callback(this.participants)
+          );
+          if (scope) scope.$on('$destroy', unsubscribe);
           return this.participants;
         },
-        subscribeToAgents: function(scope, callback) {
+        subscribeToAgents(scope, callback) {
           const unsubscribe = $rootScope.$on('agents-change', () => callback(this.agents));
-          scope.$on('$destroy', unsubscribe);
+          if (scope) scope.$on('$destroy', unsubscribe);
           return this.agents;
         },
-        subscribeToBills: function(scope, callback) {
+        subscribeToBills(scope, callback) {
           const unsubscribe = $rootScope.$on('bills-change', () => callback(this.bills));
-          scope.$on('$destroy', unsubscribe);
+          if (scope) scope.$on('$destroy', unsubscribe);
           return this.bills;
         }
       };

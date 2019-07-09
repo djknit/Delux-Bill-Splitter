@@ -1,12 +1,12 @@
 <div class="card">
   <h5 class="card-header">Bills</h5>
   <div class="card-body">
-    <p ng-if="$ctrl.bills.length < 1" class="my-4 text-center">
-      There are no bills in this list yet. Click the "Add" button below to add a bill.
-    </p>
     <p ng-if="$ctrl.participants.length < 1" class="my-4 text-center">
       You can not add bills until you have added at least one participant. It is strongly 
       recommended that you enter all of the participants before adding any bills.
+    </p>
+    <p ng-if="$ctrl.bills.length < 1" class="my-4 text-center">
+      There are no bills in this list yet. Click the "Add" button below to add a bill.
     </p>
     <p ng-if="$ctrl.bills.length > 0">
       {{$ctrl.bills}}
@@ -27,4 +27,4 @@
   modal-name="{{$ctrl.ADD_BILL_MODAL_NAME}}"
   name-input-name="{{$ctrl.NAME_INPUT_NAME}}"
   focus-input="$ctrl.delayedFocusInput"
-></add-bill-modal>
+/>

@@ -1,11 +1,11 @@
 <div class="form-group amount">
-  <label for="{{$ctrl.AMOUNT_INPUT_NAME}}">
+  <label for="{{$ctrl.INPUT_NAME}}">
     Bill Total <span class="normal">(US Dollars)</span>
   </label>
   <input
     type="number"
     class="form-control"
-    id="{{$ctrl.inputName}}"
+    id="{{$ctrl.INPUT_NAME}}"
     ng-model="$ctrl.inputValue.raw"
     ng-change="$ctrl.handleChange()"
   />
