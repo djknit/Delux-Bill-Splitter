@@ -27,7 +27,6 @@ angular
             // if new entity is not a participant, then it is an agent
             let entitiesArray = isParticipant ? participants : agents;
             let entityType = isParticipant ? 'participant' : 'agent';
-            // let test = this.isDuplicate(trimmedName, entitiesArray);
             if (isDuplicate(trimmedName, entitiesArray)) {
               return reject({
                 message: 'There is already ' + (isParticipant ? 'a ' : 'an ') + entityType +

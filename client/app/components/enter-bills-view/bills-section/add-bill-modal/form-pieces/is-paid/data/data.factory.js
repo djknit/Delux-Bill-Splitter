@@ -1,9 +1,10 @@
 'use-strict';
 
 angular
-  .module('billFormAmountData')
-  .factory('BillFormAmountData', function() {
-    function generateAmountInputValueObj() {
+  .module('billFormIsPaidData')
+  .factory('BillFormIsPaidData', function() {
+    return null;
+    function generateIsPaidInputValueObj() {
       return {
         _raw: null,
         rounded: null,

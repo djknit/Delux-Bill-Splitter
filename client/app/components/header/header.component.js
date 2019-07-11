@@ -6,22 +6,23 @@ angular
     templateUrl: 'components/header/header.template.html',
     controller: ['CurrentRoute', '$scope',
       function HeaderCtrl(CurrentRoute, $scope) {
-        let checkIfHomeView = hash => {
+        let checkIfHomeView = (hash) => {
           this.isHomeView = hash === '#!/';
         }
 
         checkIfHomeView(CurrentRoute.getHash());
 
-        this.reportHashChange = newHash => {
-          CurrentRoute.notify(newHash);
+        let handleChange = (newHash) => {
+          checkIfHomeView(newHash);
+          console.log('heyoheyoheyo')
+          console.log(newHash);
+          console.log(checkIfHomeView(newHash))
+          console.log(this.isHomeView)
         }
 
         // Awesome source: https://www.codelord.net/2015/05/04/angularjs-notifying-about-changes-from-services-to-controllers/
         // I learned how to create the following method from this source.
-        CurrentRoute.subscribe($scope, function handleChange(newHash) {
-          checkIfHomeView(newHash);
-        });
-
+        CurrentRoute.subscribe($scope, handleChange);
       }
     ]
   });

@@ -2,19 +2,10 @@
 
 angular
   .module('billFormData')
-  .factory('BillFormData',['$rootScope', 'BillsList',
-    function($rootScope, BillsList) {
-      let entities = {
-        agents: BillsList.subscribeToAgents(
-          null,
-          (agents) => entities.agents = agents
-        ),
-        participants: BillsList.subscribeToParticipants(
-          null,
-          (participants) => entities.participants = participants
-        )
-      };
-      console.log(entities);
+  .factory('BillFormData', [
+    '$rootScope', 'BillsList', 'BillFormNameData',
+    function billFormNameDataFactory($rootScope, BillsList, BillFormNameData) {
+      console.log(BillFormNameData)
       let state = {};
       reset();
 
@@ -24,7 +15,7 @@ angular
         state.hasSuccess = false;
         state.hasProblem = false;
         state.inputValues = {};
-        state.inputValues.name = '';
+        // state.inputValues.name = '';
         state.inputValues.amount = generateAmountInputValueObj();
         state.inputValues.billers = {
           oneOrMoreBillers: 'one',

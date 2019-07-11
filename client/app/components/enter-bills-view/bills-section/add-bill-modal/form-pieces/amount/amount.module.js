@@ -1,4 +1,8 @@
 'use-strict';
 
 angular
-  .module('billFormAmount', []);
+  .module('billFormAmount',
+    [
+      'billFormAmountData'
+    ]
+  );

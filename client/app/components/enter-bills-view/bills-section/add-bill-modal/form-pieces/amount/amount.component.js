@@ -3,22 +3,19 @@
 angular
   .module('billFormAmount')
   .component('billFormAmount', {
-    templateUrl: 'components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/form-amount.template.html',
+    templateUrl: 'components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/amount.template.html',
     bindings: {
     },
-    controller: ['BillFormData', '$scope',
-      function billFormAmountCtrl(BillFormData, $scope) {
+    controller: ['BillFormAmountData', '$scope',
+      function billFormAmountCtrl(BillFormAmountData, $scope) {
         this.INPUT_NAME = 'newBillAmountIn';
 
-        this.inputValue = BillFormData.subscribeToInputValue(
-          'amount',
+        // Value returned from data service contains input and display values. Change handler is not needed
+          // because setting input value on returned object updates data in service and brodcasts change.
+        this.inputValue = BillFormAmountData.subscribe(
           $scope,
           (updatedValue) => this.inputValue = updatedValue
         );
-
-        this.handleChange = () => {
-          BillFormData.updateAmountInput(this.inputValue.raw);
-        };
       }
     ]
   });

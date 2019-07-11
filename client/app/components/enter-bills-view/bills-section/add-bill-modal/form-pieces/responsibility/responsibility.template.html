@@ -1,4 +1,4 @@
-<fieldset id="responsible-participants-fieldset">
+<fi id="responsible-participants-fieldset">
   <legend>
     Responsible Participants
     <span class="normal">
@@ -55,13 +55,41 @@
     ng-if="$ctrl.inputValue.splittingMethod === 'evenlyBetweenAll'"
     class="responsible-participant-names form-subsection"
   >
-
+    <div
+      ng-if="$ctrl.inputValue.allEvenlyAmountPerPerson !== null"
+      id="amount-per-person-display"
+    >
+      <span class="amount">$ {{$ctrl.inputValue.allEvenlyAmountPerPerson.display}}</span>
+      per person for each of the {{$ctrl.inputValue.numberOfParticipants}} participants
+    </div>
   </div>
   <fieldset
     ng-if="$ctrl.inputValue.splittingMethod === 'evenlyBetweenSome'"
     class="responsible-participant-names form-subsection"
   >
-test2
+  testtesttest
+    <div
+      ng-repeat="participant in $ctrl.inputValue.someEvenly.participants"
+      class="form-group form-inline some-evenly"
+    >
+      <label for="participant-{{$index + 1}}-name-select" class="participant-multiple">
+        Name:
+      </label>
+      <select
+        class="form-control"
+        id="participant-{{$index + 1}}-name-select"
+        ng-model="participant.selected"
+        ng-change="$ctrl.handleChange('participantsMultiple', 'selected', $index)"
+      >
+        <option selected disabled ng-value="null">Select participant name</option>
+        <option
+          ng-repeat="participant in $ctrl.participants track by $index"
+          ng-value="participant"
+        >
+          {{participant.name}}
+        </option>
+      </select>
+    </div>
   </fieldset>
   <fieldset
     ng-if="$ctrl.inputValue.splittingMethod === 'individually'"

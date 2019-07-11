@@ -1,10 +1,8 @@
 'use-strict';
 
-import { checkServerIdentity } from "tls";
-
 angular
-  .module('billFormAmountData')
-  .factory('BillFormAmountData', ['$rootScope',
+  .module('billFormNameData')
+  .factory('BillFormNameData', ['$rootScope',
     function nameDataFactory($rootScope) {
     
       let nameInputValue = null;
@@ -22,10 +20,13 @@ angular
         subscribe(scope, callback) {
           const unsubscribe = $rootScope.$on(
             CHANGE_EVENT_NAME,
-            () => callback(this.nameInputValue)
+            () => callback(this.value)
           );
           if (scope) scope.$on('$destroy', unsubscribe);
-          return this.nameInputValue
+          return this.value;
+        },
+        reset() {
+          nameInputValue = null;
         }
       };
     }
