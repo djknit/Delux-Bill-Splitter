@@ -36,6 +36,8 @@ angular
 
       const CHANGE_EVENT_NAME = 'bill-form-amount-change';
 
+      let test = 0;
+
       return {
         get value() {
           return {

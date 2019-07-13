@@ -14,14 +14,22 @@ angular
             console.log(updatedInputValue);
           }
         );
-        console.log(this.inputValue);
         this.participants = BillsList.subscribeToParticipants(
           $scope,
           (updatedParticipants) => this.participants = updatedParticipants
         );
 
-        this.handleChange = () => {
-          console.log(this.inputValue)
+        this.handleChange = BillFormResponsibilityData.updateValue;
+        
+        this.addSomeEvenlyInput = () => BillFormResponsibilityData.addInput('someEvenly');
+        this.removeSomeEvenlyInput = (index) => {
+          BillFormResponsibilityData.removeInput('someEvenly', index);
+        }
+        this.addIndividuallyInput = () => {
+          BillFormResponsibilityData.addInput('individually');
+        }
+        this.removeIndividuallyInput = (index) => {
+          BillFormResponsibilityData.removeInput('individually', index);
         }
       }
     ]

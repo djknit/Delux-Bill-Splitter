@@ -5,18 +5,42 @@ angular
   .factory('BillFormResponsibilityData', [
     'BillsList', 'BillFormAmountData', '$rootScope',
     function(BillsList, BillFormAmountData, $rootScope) {
-      let agents = BillsList.subscribeToAgents(
-        null,
-        (updatedAgents) => agents = updatedAgents
-      );
+      const CHANGE_EVENT_NAME = 'bill-form-responsibility-change';
+
       let participants = BillsList.subscribeToParticipants(
         null,
-        (updatedParticipants) => participants = updatedParticipants
+        (updatedParticipants) => {
+          participants = updatedParticipants;
+          if (participants.length === 0) {
+            inputValue.someEvenly.participants = [];
+            inputValue.individually = [];
+          }
+          else {
+            checkParticipantsArrayForRemovedParticipants(inputValue.someEvenly.participants);
+            checkParticipantsArrayForRemovedParticipants(inputValue.individually);
+            setIndividuallyRemainingAmount();
+          }
+          announceChange();
+        }
       );
       let amountInput = BillFormAmountData.subscribe(
         null,
-        (updatedAmountObj) => amountInput = updatedAmountObj 
+        (updatedAmountObj) => {
+          amountInput = updatedAmountObj;
+          setIndividuallyRemainingAmount();
+          announceChange();
+        }
       );
+
+      function checkParticipantsArrayForRemovedParticipants(array) {
+        // used when bill list participants change in order to make sure responsibility is not
+          // being assigned to a participant that is no longer in the list
+        array.forEach((participantInput, index) => {
+          const participant = participantInput.selected;
+          if (!participant) return null;
+          if (participants.indexOf(participant.id) > -1) array.splice(index, 1);
+        })
+      };
 
       let inputValue = {};
       reset();
@@ -40,7 +64,18 @@ angular
               return this.display === null ? null : parseFloat(this.display);
             }
           },
-          participants: []
+          participants: [],
+          get remainingChoiceIds() {
+            // used to exclude already chosen participants from dropdown so duplicate cannot be chosen
+            const alreadyChosenIds = inputValue.someEvenly.participants.filter(
+              participantInput => participantInput.selected
+            ).map(
+              participantInput => participantInput.selected.id
+            );
+            return participants.filter(
+              participant => alreadyChosenIds.indexOf(participant.id) === -1
+            ).map(participant => participant.id);
+          }
         };
         inputValue.individually = [];
         addSomeEvenlyInput();
@@ -56,6 +91,9 @@ angular
       }
 
       function addSomeEvenlyInput() {
+        if (inputValue.someEvenly.participants.length >= participants.length) {
+          return null;
+        }
         inputValue.someEvenly.participants.push({
           selected: null
         });
@@ -68,7 +106,7 @@ angular
             method: 'dollarAmount',
             dollarAmount: BillFormAmountData.generateAmountInputValueObj(),
             percent: generatePercentAmountInputValueObj(),
-            remainingAmount: null,
+            remainingAmount: BillFormAmountData.generateAmountInputValueObj(),
             get currentTotal() {
               if (this.method = 'dollarAmount') return this.dollarAmount.rounded;
               if (this.method = 'percent') return this.percent.rounded;
@@ -103,31 +141,31 @@ angular
         };
       }
 
-      function getRemainingAmountForLastIndividual() {
+      function setIndividuallyRemainingAmount() {
         const billTotal = amountInput.rounded;
         const numParticipants = inputValue.individually.length;
         if (numParticipants === 0) return null;
         let totalAmountAssigned = 0;
         inputValue.individually.forEach((individual, index) => {
+          let individualRemainingAmountObj = individual.amount.remainingAmount;
           if (!billTotal && billTotal !== 0) {
-            return individual.remainingAmount = null;
+            return individualRemainingAmountObj.raw = null;
           }
+          // remainingAmount is only calculated for the last entry in the individually section
           else if (index < numParticipants - 1) {
             const individualTotal = individual.currentTotal || 0;
             totalAmountAssigned += individualTotal;
-            individual.remainingAmount = null;
+            return individualRemainingAmountObj.raw = null;
           }
           else {
-            remainingAmount = billTotal - totalAmountAssigned;
-            individual.remainingAmount = {
-              rounded: remainingAmount,
-              display: remainingAmount < 0 ? 'negative' : remainingAmount.toFixed(2)
-            }
+            individualRemainingAmountObj.raw = billTotal - totalAmountAssigned;
           }
         })
       }
 
-      const CHANGE_EVENT_NAME = 'bill-form-responsibility-change';
+      function announceChange() {
+        $rootScope.$emit(CHANGE_EVENT_NAME);
+      }
 
       return {
         get inputValue() {
@@ -136,7 +174,23 @@ angular
             someEvenly: {
               amountPerPerson: someEvenly.amountPerPerson.display,
               participants: someEvenly.participants.map(
-                participant => Object.assign({}, participant)
+                participantInput => {
+                  let result = Object.assign({}, participantInput);
+                  let choiceIds = someEvenly.remainingChoiceIds;
+                  if (participantInput.selected !== null) {
+                    choiceIds.push(participantInput.selected.id);
+                  }
+                  result.choices = participants.map(
+                    participant => {
+                      const isValidChoice = choiceIds.indexOf(participant.id) > -1;
+                      return {
+                        value: participant,
+                        isValidChoice
+                      }
+                    }
+                  );
+                  return result;
+                }
               )
             },
             individually: individually.map(participant => {
@@ -153,7 +207,8 @@ angular
                   percent: {
                     raw: percent.raw,
                     display: percent.display
-                  }
+                  },
+                  remainingAmount: remainingAmount.display
                 }
               }
             }),
@@ -173,26 +228,35 @@ angular
           if (type === 'someEvenly') addSomeEvenlyInput();
           else if (type === 'individually') addIndividuallyInput();
           else throw new Error('Invalid input type argument');
-          $rootScope.$emit(CHANGE_EVENT_NAME);
+          announceChange();
         },
         removeInput(type, index) {
-          
+          let arrayToEdit;
+          if (type === 'someEvenly') arrayToEdit = inputValue.someEvenly.participants;
+          else if (type === 'individually') inputValue.individually;
+          else throw new Error('Invalid input type argument');
+          arrayToEdit.splice(index, 1);
+          announceChange();
         },
-        updateValue(propNewValue, propName, nestedPropName, index) {
+        updateValue(propNewValue, propName, nestedPropName, index, doubleNestedPropName) {
           if (propName === 'splittingMethod') {
             inputValue.splittingMethod = propNewValue;
           }
-          else if (propName === 'billerSingle') {
-            inputValue.billerSingle[nestedPropName] = propNewValue;
+          else if (propName === 'someEvenly') {
+            inputValue.someEvenly.participants[index][nestedPropName] = propNewValue;
           }
-          else if (propName === 'billersMultiple' && nestedPropName === 'amount') {
-            inputValue.billersMultiple[billMultIndex].amount.raw = propNewValue.raw;
+          else if (propName === 'individually' && nestedPropName === 'amount') {
+            if (doubleNestedPropName === 'dollarAmount' || doubleNestedPropName === 'percent') {
+              inputValue.individually[index].amount[doubleNestedPropName].raw = propNewValue;
+            }
+            else inputValue.individually[index].amount[doubleNestedPropName] = propNewValue;
           }
-          else if (propName === 'billersMultiple') {
-            inputValue.billersMultiple[billMultIndex][nestedPropName] = propNewValue;
+          else if (propName === 'individually') {
+            inputValue.individually[index][nestedPropName] = propNewValue;
           }
           else throw new Error('Invalid property name.');
-          $rootScope.$emit(CHANGE_EVENT_NAME);
+          if (propName === 'individually') setIndividuallyRemainingAmount();
+          announceChange();
         }
       };
     }
