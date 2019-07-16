@@ -119,7 +119,7 @@
     class="responsible-participant-names form-subsection"
   >
     <fieldset
-      ng-repeat="participantInput in $ctrl.inputValue.individually"
+      ng-repeat="participantInput in $ctrl.inputValue.individually.participants"
       class="form-group form-inline some-evenly"
     >
       <legend>Responsible Participant {{$index + 1}}</legend>
@@ -134,14 +134,15 @@
           class="form-control"
           id="individually-participant-{{$index + 1}}-name-select"
           ng-model="participantInput.selectedId"
-          ng-change="$ctrl.handleChange(participantInput.selectedId, 'individually', 'selected', $index)"
+          ng-change="$ctrl.handleChange(participantInput.selectedId, 'individually', 'selectedId', $index)"
         >
           <option selected disabled ng-value="null">Select participant name</option>
           <option
-            ng-repeat="participant in $ctrl.participants track by participant.id"
-            ng-value="participant.id"
+            ng-repeat="participant in participantInput.choices track by participant.value.id"
+            ng-value="participant.value.id"
+            ng-disabled="participant.isValidChoice === false"
           >
-            {{participant.name}}
+            {{participant.value.name}}
           </option>
         </select>
       </div>
@@ -150,8 +151,8 @@
     <button
       class="btn btn-primary"
       id="add-rp-btn"
-      ng-click="$ctrl.addSomeEvenlyInput()"
-      ng-disabled="$ctrl.inputValue.someEvenly.participants.length >= $ctrl.participants.length"
+      ng-click="$ctrl.addIndividuallyInput()"
+      ng-disabled="$ctrl.inputValue.individually.participants.length >= $ctrl.participants.length"
     >
       + Add Participant
     </button>

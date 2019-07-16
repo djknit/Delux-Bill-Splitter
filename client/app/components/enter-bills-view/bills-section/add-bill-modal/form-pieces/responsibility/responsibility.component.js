@@ -14,6 +14,7 @@ angular
             console.log(updatedInputValue);
           }
         );
+        console.log(this.inputValue)
         this.participants = BillsList.subscribeToParticipants(
           $scope,
           (updatedParticipants) => this.participants = updatedParticipants

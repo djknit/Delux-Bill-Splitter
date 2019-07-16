@@ -100,7 +100,10 @@ angular
         });
       }
 
-      function addIndividuallyInput() { 
+      function addIndividuallyInput() {
+        if (inputValue.individually.participants.length >= participants.length) {
+          return null;
+        }
         inputValue.individually.participants.push({
           selectedId: null,
           amount: {
@@ -240,10 +243,10 @@ angular
               participants: addChoicesArrayToParticipantInputs(
                 individuallyParticipants,
                 inputValue.individually.remainingChoiceIds
-              ),
-              splittingMethod,
-              allEvenlyAmountPerPerson: allEvenlyAmountPerPerson.display
-            }
+              )
+            },
+            splittingMethod,
+            allEvenlyAmountPerPerson: allEvenlyAmountPerPerson.display
           };
         },
         subscribe(scope, callback) {
@@ -263,14 +266,17 @@ angular
         removeInput(type, index) {
           let arrayToEdit;
           if (type === 'someEvenly') arrayToEdit = inputValue.someEvenly.participants;
-          else if (type === 'individually') inputValue.individually;
+          else if (type === 'individually') arrayToEdit = inputValue.individually.participants;
           else throw new Error('Invalid input type argument');
           arrayToEdit.splice(index, 1);
           announceChange();
         },
         updateValue(propNewValue, propName, nestedPropName, index, doubleNestedPropName) {
+          console.log(propName);
+          console.log(propNewValue);
           if (propName === 'splittingMethod') {
             inputValue.splittingMethod = propNewValue;
+            console.log('update splitting method')
           }
           else if (propName === 'someEvenly') {
             inputValue.someEvenly.participants[index][nestedPropName] = propNewValue;
@@ -279,10 +285,13 @@ angular
             if (doubleNestedPropName === 'dollarAmount' || doubleNestedPropName === 'percent') {
               inputValue.individually[index].amount[doubleNestedPropName].raw = propNewValue;
             }
-            else inputValue.individually[index].amount[doubleNestedPropName] = propNewValue;
+            else {
+              inputValue.individually.participants[index].amount[doubleNestedPropName]
+                = propNewValue;
+            }
           }
           else if (propName === 'individually') {
-            inputValue.individually[index][nestedPropName] = propNewValue;
+            inputValue.individually.participants[index][nestedPropName] = propNewValue;
           }
           else throw new Error('Invalid property name.');
           if (propName === 'individually') setIndividuallyRemainingAmount();
