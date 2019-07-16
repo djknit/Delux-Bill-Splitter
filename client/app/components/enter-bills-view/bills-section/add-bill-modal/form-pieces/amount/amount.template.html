@@ -1,0 +1,23 @@
+<div class="form-group amount">
+  <label for="{{$ctrl.INPUT_NAME}}">
+    Bill Total <span class="normal">(US Dollars)</span>
+  </label>
+  <input
+    type="number"
+    class="form-control"
+    id="{{$ctrl.INPUT_NAME}}"
+    ng-model="$ctrl.inputValue.raw"
+  />
+  <div
+    ng-if="$ctrl.inputValue.display !== null && $ctrl.inputValue.display !== 'negative'"
+    id="formatted-amount-display"
+  >
+    $ {{$ctrl.inputValue.display}}
+  </div>
+  <div
+    ng-if="$ctrl.inputValue.display === 'negative'"
+    id="no-negative-amount-message"
+  >
+    Negative values are not allowed
+  </div>
+</div>

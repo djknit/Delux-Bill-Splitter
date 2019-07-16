@@ -6,7 +6,7 @@ const path = require('path');
 app.use(express.static('client/app'));
 app.use(require('morgan')('combined'));
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 7001;
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));

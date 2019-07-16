@@ -4,6 +4,7 @@
 
 ## Contents
 * [Links](#links)
+* [Inspiration](#inspiration)
 * [Project Goals](#project-goals)
 * [Action Plan](#action-plan)
 * [Project Features](#project-features)
@@ -14,6 +15,9 @@
 ## Links
 * Deployed page: [delux-bill-splitter.herokuapp.com](https://delux-bill-splitter.herokuapp.com/#!/)
 * GitHub repository: [github.com/djknit/Delux-Bill-Splitter](https://github.com/djknit/Delux-Bill-Splitter)
+
+## Inspiration
+This app was inspired by the following problem that I encountered a few years ago. I was living in a rental house with four other people. I had two bills in my name, two of my roommates had bills in their names, and the rent had to be paid with one check. We were all splitting the bills and rent so we could have split each bill individually and split the rent when it was due, but that was going to involve a large number of payments between us. Additionally, some of those payments would involve one person paying another person only to have the second person end up having to pay the money back to the first person. I thought that there must be a way to minimize the number of payments that each person has to make. I was able to use basic algebra to develop a system for adding all of the bills and rent together each month and figuring out what each person owed or was owed. With this method, each person only needed to make one payment for the month which would be distributed as necessary so that everybody came out even. That is the situation that inspired me to create this app, but since I am making the app, I decided that I would like to try to make it as useful as possible with the goal of covering any possible bill splitting situation.
 
 ## Project Goals
 * This app aims to be an easy tool to split any bill or group of bills any way between any number of people.
@@ -62,7 +66,7 @@ Currently, I am working on the "Enter Bills" page which is where the most import
 
 Try to fix the following bugs:
 
-* [ ] `alert.css` appears to not be working
+* [x] `alert.css` appears to not be working
 
 Consider the following possible improvements:
 

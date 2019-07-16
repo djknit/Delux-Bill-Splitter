@@ -32,9 +32,7 @@
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-clip: padding-box;
-  /* border: 1px solid #ced4da; */
-  /* border-radius: .25rem; */
+  /* background-clip: padding-box; */
 }
 
 #no-negative-amount-message {
@@ -57,7 +55,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* Biller section */
-#biller-fieldset > hr {
+#biller-fieldset > hr,
+#responsible-participants-fieldset > hr {
   margin: 5px 0 5px 15px;
 }
 
@@ -65,36 +64,39 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 10px;
 }
 
-#newBillForm fieldset.biller-names {
+#newBillForm .form-subsection {
   padding-left: 15px;
   font-size: .85rem;
 }
 
-#newBillForm fieldset.biller-names > legend,
-#newBillForm fieldset.biller-names > fieldset > legend {
+#newBillForm .form-subsection > legend,
+#newBillForm .form-subsection > fieldset > legend {
   margin-bottom: 5px;
   font-size: .9rem;
 }
 
-#newBillForm fieldset.biller-names > .form-group,
-#newBillForm fieldset.biller-names > fieldset > .form-group {
+#newBillForm .form-subsection > .form-group,
+#newBillForm .form-subsection > fieldset > .form-group {
   margin-bottom: 5px;
 }
 
-#newBillForm fieldset.biller-names input.form-control,
-#newBillForm fieldset.biller-names select.form-control,
+#newBillForm .form-subsection input.form-control,
+#newBillForm .form-subsection select.form-control,
 #newBillForm .form-group.form-inline > label {
   font-size: .85rem;
 }
 
-#newBillForm select.form-control > option[disabled] {
+#newBillForm select.form-control > option[disabled],
+#newBillForm select.form-control.ng-empty {
   color: #6c757d;
 }
 
-#newBillForm .biller-names > .biller-multiple {
+#newBillForm .form-subsection > .biller-multiple,
+#newBillForm .form-subsection > .some-evenly {
   position: relative;
 }
-#newBillForm .biller-multiple > .remove-biller {
+#newBillForm .biller-multiple > .remove-biller,
+#newBillForm .some-evenly > .remove-r-p {
   padding: 1px 3px;
   font-size: .7rem;
   position: absolute;
@@ -102,22 +104,22 @@ input[type=number]::-webkit-outer-spin-button {
   right: 0;
 }
 
-#newBillForm .biller-names > fieldset > .form-group .biller-multiple {
+#newBillForm .form-subsection > fieldset > .form-group .biller-multiple {
   font-size: .8rem;
 }
-#newBillForm .biller-names > fieldset > .form-group input.biller-multiple[type="text"] {
+#newBillForm .form-subsection > fieldset > .form-group input.biller-multiple[type="text"] {
   padding: 3px 6px;
 }
 
 .form-group.mult-billers-name {
   display: flex;
 }
-.form-group.mult-billers-name > label,
+.form-group.form-inline > label,
 .form-group.mult-billers-amount > label {
   padding-right: 5px;
 }
-.form-group.mult-billers-name > input,
-.form-group.mult-billers-name > select {
+.form-group.form-inline > input:not([type="number"]),
+.form-group.form-inline > select {
   flex-grow: 1;
 }
 
@@ -129,22 +131,22 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: 400;
   line-height: 1.2;
   color: #495057;
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
 }
 .biller-no-negative-amount-message {
   display: inline-block;
-  position: absolute;
   padding-left: 8px;
   font-size: .85rem;
   line-height: 1.2;
   color: #dc3545;
 }
 
-.mult-billers-name-separator {
+.mult-entities-name-separator {
   margin: 10px 0 5px;
 }
 
-#add-biller-btn {
+#add-biller-btn,
+#add-rp-btn {
   font-size: .85rem;
   padding: .3rem .6rem;
 }

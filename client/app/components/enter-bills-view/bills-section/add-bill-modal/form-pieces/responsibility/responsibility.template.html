@@ -1,0 +1,160 @@
+<fieldset id="responsible-participants-fieldset">
+  <legend>
+    Responsible Participants
+    <span class="normal">
+      (How do you want to split the bill between the participants?)
+    </span>
+  </legend>
+  <div class="form-group">
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="splitting-method-in"
+        id="splitting-method-in_evenlyBetweenAll"
+        value="evenlyBetweenAll"
+        ng-model="$ctrl.inputValue.splittingMethod"
+        ng-change="$ctrl.handleChange($ctrl.inputValue.splittingMethod, 'splittingMethod')"
+      />
+      <label class="form-check-label" for="splitting-method-in_evenlyBetweenAll">
+        Evenly between all participants
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="splitting-method-in"
+        id="splitting-method-in_evenlyBetweenSome"
+        value="evenlyBetweenSome"
+        ng-model="$ctrl.inputValue.splittingMethod"
+        ng-change="$ctrl.handleChange($ctrl.inputValue.splittingMethod, 'splittingMethod')"
+      />
+      <label class="form-check-label" for="splitting-method-in_evenlyBetweenSome">
+        Evenly between some participants
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="splitting-method-in"
+        id="splitting-method-in_individually"
+        value="individually"
+        ng-model="$ctrl.inputValue.splittingMethod"
+        ng-change="$ctrl.handleChange($ctrl.inputValue.splittingMethod, 'splittingMethod')"
+      />
+      <label class="form-check-label" for="splitting-method-in_individually">
+        Other (assign responsibility individually)
+      </label>
+    </div>
+  </div>
+  <hr />
+
+  <div
+    ng-if="$ctrl.inputValue.splittingMethod === 'evenlyBetweenAll'"
+    class="responsible-participant-names form-subsection"
+  >
+    <div
+      ng-if="$ctrl.inputValue.allEvenlyAmountPerPerson !== null"
+      id="amount-per-person-display"
+    >
+      <span class="amount">$ {{$ctrl.inputValue.allEvenlyAmountPerPerson}}</span>
+      per person for each of the {{$ctrl.participants.length}} participants
+    </div>
+  </div>
+  <fieldset
+    ng-if="$ctrl.inputValue.splittingMethod === 'evenlyBetweenSome'"
+    class="responsible-participant-names form-subsection"
+  >
+    <fieldset
+      ng-repeat="participantInput in $ctrl.inputValue.someEvenly.participants"
+      class="form-group form-inline some-evenly"
+    >
+      <legend>Responsible Participant {{$index + 1}}</legend>
+      <button class="remove-r-p btn btn-danger" ng-click="$ctrl.removeSomeEvenlyInput($index)">
+        - Remove
+      </button>
+      <div class="form-group form-inline some-evenly">
+        <label for="evenly-participant-{{$index + 1}}-name-select">
+          Name:
+        </label>
+        <select
+          class="form-control"
+          id="evenly-participant-{{$index + 1}}-name-select"
+          ng-model="participantInput.selectedId"
+          ng-change="$ctrl.handleChange(participantInput.selectedId, 'someEvenly', 'selectedId', $index)"
+        >
+          <option selected disabled ng-value="null">Select participant name</option>
+          <option
+            ng-repeat="participant in participantInput.choices track by participant.value.id"
+            ng-value="participant.value.id"
+            ng-disabled="participant.isValidChoice === false"
+          >
+            {{participant.value.name}}
+          </option>
+        </select>
+      </div>
+      <hr class="mult-entities-name-separator" />
+    </fieldset>
+    <div
+      ng-if="$ctrl.inputValue.someEvenly.amountPerPerson !== null"
+      id="amount-per-person-display"
+    >
+      <span class="amount">$ {{$ctrl.inputValue.someEvenly.amountPerPerson}}</span> per
+      person for each of the {{$ctrl.inputValue.someEvenly.participants.length}} participants
+      <hr class="mult-entities-name-separator" />
+    </div>
+    <button
+      class="btn btn-primary"
+      id="add-rp-btn"
+      ng-click="$ctrl.addSomeEvenlyInput()"
+      ng-disabled="$ctrl.inputValue.someEvenly.participants.length >= $ctrl.participants.length"
+    >
+      + Add Participant
+    </button>
+  </fieldset>
+  <fieldset
+    ng-if="$ctrl.inputValue.splittingMethod === 'individually'"
+    class="responsible-participant-names form-subsection"
+  >
+    <fieldset
+      ng-repeat="participantInput in $ctrl.inputValue.individually.participants"
+      class="form-group form-inline some-evenly"
+    >
+      <legend>Responsible Participant {{$index + 1}}</legend>
+      <button class="remove-r-p btn btn-danger" ng-click="$ctrl.removeIndividuallyInput($index)">
+        - Remove
+      </button>
+      <div class="form-group form-inline individually">
+        <label for="individually-participant-{{$index + 1}}-name-select">
+          Name:
+        </label>
+        <select
+          class="form-control"
+          id="individually-participant-{{$index + 1}}-name-select"
+          ng-model="participantInput.selectedId"
+          ng-change="$ctrl.handleChange(participantInput.selectedId, 'individually', 'selectedId', $index)"
+        >
+          <option selected disabled ng-value="null">Select participant name</option>
+          <option
+            ng-repeat="participant in participantInput.choices track by participant.value.id"
+            ng-value="participant.value.id"
+            ng-disabled="participant.isValidChoice === false"
+          >
+            {{participant.value.name}}
+          </option>
+        </select>
+      </div>
+      <hr class="mult-entities-name-separator" />
+    </fieldset>
+    <button
+      class="btn btn-primary"
+      id="add-rp-btn"
+      ng-click="$ctrl.addIndividuallyInput()"
+      ng-disabled="$ctrl.inputValue.individually.participants.length >= $ctrl.participants.length"
+    >
+      + Add Participant
+    </button>
+  </fieldset>
+</fieldset>

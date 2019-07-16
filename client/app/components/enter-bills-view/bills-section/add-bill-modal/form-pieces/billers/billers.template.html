@@ -1,8 +1,3 @@
-<link
-  rel="stylesheet"
-  href="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/form-billers.css"
-/>
-
 <fieldset id="biller-fieldset">
   <legend>
     Biller <span class="normal">(Who is this bill paid to?)</span>
@@ -17,7 +12,7 @@
         id="one-or-more-billers-in_one"
         value="one"
         ng-model="$ctrl.inputValue.oneOrMoreBillers"
-        ng-change="$ctrl.handleChange()"
+        ng-change="$ctrl.handleChange('oneOrMoreBillers')"
       />
       <label class="form-check-label" for="one-or-more-billers-in_one">One biller (default)</label>
     </div>
@@ -29,7 +24,7 @@
         id="one-or-more-billers-in_more"
         value="more"
         ng-model="$ctrl.inputValue.oneOrMoreBillers"
-        ng-change="$ctrl.handleChange()"
+        ng-change="$ctrl.handleChange('oneOrMoreBillers')"
       />
       <label class="form-check-label" for="one-or-more-billers-in_more">
         Multiple billers
@@ -38,7 +33,7 @@
   </div>
   <hr />
   
-  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'one'" class="biller-names">
+  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'one'" class="biller-names form-subsection">
     <legend>Biller Name</legend>
     <div class="form-group" ng-if="$ctrl.agents.length > 0">
       <div class="form-check form-check-inline">
@@ -49,7 +44,7 @@
           id="one-biller-type-or-select-in_type"
           value="type"
           ng-model="$ctrl.inputValue.billerSingle.typeOrSelect"
-          ng-change="$ctrl.handleChange()"
+          ng-change="$ctrl.handleChange('billerSingle', 'typeOrSelect')"
         />
         <label class="form-check-label" for="one-biller-type-or-select-in_type">
           Enter a new name
@@ -63,7 +58,7 @@
           id="one-biller-type-or-select-in_select"
           value="select"
           ng-model="$ctrl.inputValue.billerSingle.typeOrSelect"
-          ng-change="$ctrl.handleChange()"
+          ng-change="$ctrl.handleChange('billerSingle', 'typeOrSelect')"
         />
         <label class="form-check-label" for="one-biller-type-or-select-in_select">
           Select from billers already used in this list
@@ -81,7 +76,7 @@
         id="one-biller-name-in"
         placeholder="Name of business or person the bill is paid to..."
         ng-model="$ctrl.inputValue.billerSingle.typed"
-        ng-change="$ctrl.handleChange()"
+        ng-change="$ctrl.handleChange('billerSingle', 'typed')"
         aria-label="Biller name"
       />
     </div>
@@ -94,7 +89,7 @@
         class="form-control"
         id="one-biller-name-select"
         ng-model="$ctrl.inputValue.billerSingle.selected"
-        ng-change="$ctrl.handleChange()"
+        ng-change="$ctrl.handleChange('billerSingle', 'selected')"
         aria-label="Select biller name"
       >
         <option selected disabled ng-value="null">Select biller name</option>
@@ -108,11 +103,11 @@
     </div>
   </fieldset>
   
-  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'more'" class="biller-names">
+  <fieldset ng-if="$ctrl.inputValue.oneOrMoreBillers === 'more'" class="biller-names form-subsection">
 
-    <fieldset ng-repeat="biller in $ctrl.inputValue.billersMultiple" class="biller-multiple">
+    <fieldset ng-repeat="biller in $ctrl.inputValue.billersMultiple track by $index" class="biller-multiple">
       <legend>Biller {{$index + 1}}</legend>
-      <button class="remove-biller btn btn-danger" ng-click="$ctrl.removeBillerInput($index)">
+      <button class="remove-biller btn btn-danger" ng-click="$ctrl.removeBillerMult($index)">
         - Remove
       </button>
       <div class="form-group" ng-if="$ctrl.agents.length > 0">
@@ -124,7 +119,7 @@
             id="biller-{{$index + 1}}-type-or-select-in_type"
             value="type"
             ng-model="biller.typeOrSelect"
-            ng-change="$ctrl.handleChange()"
+            ng-change="$ctrl.handleChange('billersMultiple', 'typeOrSelect', $index)"
           />
           <label
             class="form-check-label biller-multiple"
@@ -141,7 +136,7 @@
             id="biller-{{$index + 1}}-type-or-select-in_select"
             value="select"
             ng-model="biller.typeOrSelect"
-            ng-change="$ctrl.handleChange()"
+            ng-change="$ctrl.handleChange('billersMultiple', 'typeOrSelect', $index)"
           />
           <label
             class="form-check-label biller-multiple"
@@ -156,15 +151,16 @@
         class="form-group mult-billers-name form-inline"
         ng-if="biller.typeOrSelect === 'type'"
       >
-        <label class="biller-multiple">Name: </label>
+        <label for="biller-{{$index + 1}}-name-in" class="biller-multiple">
+          Name: 
+        </label>
         <input
           class="form-control biller-multiple"
           type="text"
           id="biller-{{$index + 1}}-name-in"
           placeholder="Name of business or person the bill is paid to..."
           ng-model="biller.typed"
-          ng-change="$ctrl.handleChange($index)"
-          aria-label="Biller {{$index + 1}} Name"
+          ng-change="$ctrl.handleChange('billersMultiple', 'typed', $index)"
         />
       </div>
 
@@ -179,7 +175,7 @@
           class="form-control"
           id="biller-{{$index + 1}}-name-select"
           ng-model="biller.selected"
-          ng-change="$ctrl.handleChange()"
+          ng-change="$ctrl.handleChange('billersMultiple', 'selected', $index)"
         >
           <option selected disabled ng-value="null">Select biller name</option>
           <option
@@ -197,29 +193,29 @@
           class="form-control biller-multiple"
           type="number"
           id="biller-{{$index + 1}}-amount-in"
-          placeholder="$ paid to this biller..."
-          ng-model="biller.amount"
-          ng-change="$ctrl.handleChange($index)"
+          placeholder="$ owed/paid to this biller..."
+          ng-model="biller.amount.raw"
+          ng-change="$ctrl.handleChange('billersMultiple', 'amount', $index)"
           aria-label="Biller {{$index + 1}} Amount"
         />
         <div
-          ng-if="biller.amountDisplay !== null && biller.amountDisplay !== 'negative'"
+          ng-if="biller.amount.display !== null && biller.amount.display !== 'negative'"
           class="biller-amount-display"
         >
-          $ {{biller.amountDisplay}}
+          $ {{biller.amount.display}}
         </div>
         <div
-          ng-if="$ctrl.amountDisplayValue === 'negative'"
+          ng-if="biller.amount.display === 'negative'"
           class="biller-no-negative-amount-message"
         >
           Negative values are not allowed
         </div>
       </div>
 
-      <hr class="mult-billers-name-separator"/>
+      <hr class="mult-entities-name-separator"/>
     </fieldset>
 
-    <button class="btn btn-primary" id="add-biller-btn" ng-click="$ctrl.addBillerInput(1)">
+    <button class="btn btn-primary" id="add-biller-btn" ng-click="$ctrl.addBillerMult()">
       + Add Biller
     </button>
 

@@ -18,15 +18,18 @@ angular
       bodyContent: 'modalBody',
       footerContent: '?modalFooter'
     },
-    controller: function modalSkelCtrl() {
+    controller: [
+      'CurrentRoute', '$scope',
+      function modalSkelCtrl(CurrentRoute, $scope) {
 
-      // wait .2 sec before resetting content on 'Cancel' and 'Done' button press
-      // this keeps content from changing before modal has closed (which looked bad)
-      this.delayedReset = () => {
-        setTimeout(() => {
-          this.reset();
-        }, 200);
+        // wait .2 sec before resetting content on 'Cancel' and 'Done' button press
+        // this keeps content from changing before modal has closed (which looked bad)
+        this.delayedReset = () => {
+          setTimeout(() => {
+            this.reset();
+          }, 200);
+        }
+
       }
-
-    }
+    ]
   });

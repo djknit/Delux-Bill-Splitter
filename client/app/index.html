@@ -12,8 +12,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="For all your bill balancing needs">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Stylesheets used by Angular-seed for crossbrowser compatibility -->
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+  <!-- Library CDNs  (Bootstrap, jQuery, Google Fonts) -->
   <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -41,7 +43,36 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"
   ></script>
+  <link href="https://fonts.googleapis.com/css?family=Just+Another+Hand&display=swap" rel="stylesheet">
+  <!-- App and component stylesheeets (my styles) -->
   <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="views/home/home.css">
+  <link rel="stylesheet" href="views/enter-bills/enter-bills.css">
+  <link
+    rel="stylesheet"
+    href="components/enter-bills-view/bills-section/add-bill-modal/add-bill.css"
+  />
+  <link
+    rel="stylesheet"
+    href="components/enter-bills-view/bills-section/bills.css"
+  >
+  <link
+    rel="stylesheet"
+    href="components/enter-bills-view/participants-section/add-participant-modal/add-participant.css"
+  >
+  <link
+    rel="stylesheet"
+    href="components/enter-bills-view/participants-section/remove-participant-modal/remove-participant.css"
+  >
+  <link
+    rel="stylesheet"
+    href="components/enter-bills-view/participants-section/participants.css"
+  >
+  <link rel="stylesheet" href="components/alert/alert.css">
+  <link rel="stylesheet" href="components/header/header.css" />
+  <link rel="stylesheet" href="components/modal-skeleton/modal-skeleton.css">
+
+
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <link rel="shortcut icon" href="favicon.ico" />
   <title>Bill Splitter Delux</title>
@@ -68,6 +99,8 @@
   <script src="core/core.module.js"></script>
   <script src="core/current-route/current-route.module.js"></script>
   <script src="core/current-route/current-route.factory.js"></script>
+  <script src="core/bills-list/bills-list.module.js"></script>
+  <script src="core/bills-list/bills-list.factory.js"></script>
   <script src="views/home/home.module.js"></script>
   <script src="views/home/home.component.js"></script>
   <script src="views/enter-bills/enter-bills.module.js"></script>
@@ -88,17 +121,28 @@
   <script src="components/enter-bills-view/bills-section/bills.component.js"></script>
   <script src="components/enter-bills-view/bills-section/add-bill-modal/add-bill.module.js"></script>
   <script src="components/enter-bills-view/bills-section/add-bill-modal/add-bill.component.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/form-amount.module.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/form-amount.component.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/form-billers.module.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/form-billers.component.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/is-paid/form-is-paid.module.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/is-paid/form-is-paid.component.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/name/form-bill-name.module.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/name/form-bill-name.component.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/responsibility/form-bill-responsibility.module.js"></script>
-  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/responsibility/form-bill-responsibility.component.js"></script>
-
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-data/form-data.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-data/form-data.factory.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/amount.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/amount.component.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/data/data.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/amount/data/data.factory.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/billers.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/billers.component.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/data/data.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/billers/data/data.factory.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/is-paid/is-paid.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/is-paid/is-paid.component.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/is-paid/data/data.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/is-paid/data/data.factory.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/name/name.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/name/name.component.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/name/data/data.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/name/data/data.factory.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/responsibility/responsibility.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/responsibility/responsibility.component.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/responsibility/data/data.module.js"></script>
+  <script src="components/enter-bills-view/bills-section/add-bill-modal/form-pieces/responsibility/data/data.factory.js"></script>
   
 </body>
 </html>
