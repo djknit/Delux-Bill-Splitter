@@ -14,10 +14,6 @@ angular
 
         let handleChange = (newHash) => {
           checkIfHomeView(newHash);
-          console.log('heyoheyoheyo')
-          console.log(newHash);
-          console.log(checkIfHomeView(newHash))
-          console.log(this.isHomeView)
         }
 
         // Awesome source: https://www.codelord.net/2015/05/04/angularjs-notifying-about-changes-from-services-to-controllers/

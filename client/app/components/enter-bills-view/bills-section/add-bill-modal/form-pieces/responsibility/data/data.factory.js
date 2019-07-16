@@ -5,6 +5,7 @@ angular
   .factory('BillFormResponsibilityData', [
     'BillsList', 'BillFormAmountData', '$rootScope',
     function(BillsList, BillFormAmountData, $rootScope) {
+
       const CHANGE_EVENT_NAME = 'bill-form-responsibility-change';
 
       let participants = BillsList.subscribeToParticipants(
@@ -16,13 +17,13 @@ angular
             inputValue.individually = [];
           }
           else {
-            checkParticipantsArrayForRemovedParticipants(inputValue.someEvenly.participants);
-            checkParticipantsArrayForRemovedParticipants(inputValue.individually);
+            checkParticipantsArrayForRemovedParticipants(inputValue.individually.participants);
             setIndividuallyRemainingAmount();
           }
           announceChange();
         }
       );
+
       let amountInput = BillFormAmountData.subscribe(
         null,
         (updatedAmountObj) => {
@@ -32,18 +33,21 @@ angular
         }
       );
 
+      let inputValue = {};
+
+      reset();
+
       function checkParticipantsArrayForRemovedParticipants(array) {
         // used when bill list participants change in order to make sure responsibility is not
           // being assigned to a participant that is no longer in the list
-        array.forEach((participantInput, index) => {
-          const participant = participantInput.selected;
-          if (!participant) return null;
-          if (participants.indexOf(participant.id) > -1) array.splice(index, 1);
-        })
+        const participantIds = participants.map(participant => participant.id);
+        array = array.filter((participantInput) => {
+          const { selectedId } = participantInput;
+          if (!selectedId) return true;
+          if (participantIds.indexOf(selectedId) === -1) return false;
+          return true;
+        });
       };
-
-      let inputValue = {};
-      reset();
 
       function reset() {
         inputValue.splittingMethod = 'evenlyBetweenAll';
@@ -66,18 +70,15 @@ angular
           },
           participants: [],
           get remainingChoiceIds() {
-            // used to exclude already chosen participants from dropdown so duplicate cannot be chosen
-            const alreadyChosenIds = inputValue.someEvenly.participants.filter(
-              participantInput => participantInput.selected
-            ).map(
-              participantInput => participantInput.selected.id
-            );
-            return participants.filter(
-              participant => alreadyChosenIds.indexOf(participant.id) === -1
-            ).map(participant => participant.id);
+            return getRemainingChoiceIds(inputValue.someEvenly.participants);
           }
         };
-        inputValue.individually = [];
+        inputValue.individually = {
+          participants: [],
+          get remainingChoiceIds() {
+            return getRemainingChoiceIds(inputValue.individually.participants);
+          }
+        };
         addSomeEvenlyInput();
         addIndividuallyInput();
       }
@@ -95,25 +96,39 @@ angular
           return null;
         }
         inputValue.someEvenly.participants.push({
-          selected: null
+          selectedId: null
         });
       }
 
       function addIndividuallyInput() { 
-        inputValue.individually.push({
-          selected: null,
+        inputValue.individually.participants.push({
+          selectedId: null,
           amount: {
             method: 'dollarAmount',
             dollarAmount: BillFormAmountData.generateAmountInputValueObj(),
             percent: generatePercentAmountInputValueObj(),
             remainingAmount: BillFormAmountData.generateAmountInputValueObj(),
             get currentTotal() {
+              console.log(this);
               if (this.method = 'dollarAmount') return this.dollarAmount.rounded;
               if (this.method = 'percent') return this.percent.rounded;
+              if (this.method = 'remainingAmount') return this.remainingAmount.rounded;
               else throw new Error('Cannot get individual total');
             }
           }
-        })
+        });
+        console.log(inputValue.individually.participants);
+        console.log(inputValue.individually.participants[0].amount.currentTotal);
+      }
+
+      function getRemainingChoiceIds(participantInputsArray) {
+        // used to exclude already chosen participants from dropdown so duplicate cannot be chosen
+        const alreadyChosenIds = participantInputsArray.filter(
+          participantInput => participantInput.selectedId !== null
+        ).map(participantInput => participantInput.selectedId);
+        const allParticipantIds = participants.map(participant => participant.id);
+        console.log(allParticipantIds.filter(id => alreadyChosenIds.indexOf(id) === -1))
+        return allParticipantIds.filter(id => alreadyChosenIds.indexOf(id) === -1);
       }
 
       function generatePercentAmountInputValueObj() {
@@ -143,10 +158,10 @@ angular
 
       function setIndividuallyRemainingAmount() {
         const billTotal = amountInput.rounded;
-        const numParticipants = inputValue.individually.length;
+        const numParticipants = inputValue.individually.participants.length;
         if (numParticipants === 0) return null;
         let totalAmountAssigned = 0;
-        inputValue.individually.forEach((individual, index) => {
+        inputValue.individually.participants.forEach((individual, index) => {
           let individualRemainingAmountObj = individual.amount.remainingAmount;
           if (!billTotal && billTotal !== 0) {
             return individualRemainingAmountObj.raw = null;
@@ -162,6 +177,28 @@ angular
           }
         })
       }
+      
+      function addChoicesArrayToParticipantInputs(inputsArray, remainingChoiceIdsArray) {
+        return inputsArray.map(
+          participantInput => {
+            let result = Object.assign({}, participantInput);
+            result.choices = participants.map(
+              participant => {
+                console.log(participant)
+                console.log(remainingChoiceIdsArray)
+                const isValidChoice = remainingChoiceIdsArray.indexOf(participant.id) > -1
+                  || participant.id === participantInput.selectedId;
+                console.log(isValidChoice)
+                return {
+                  value: participant,
+                  isValidChoice
+                }
+              }
+            );
+            return result;
+          }
+        );
+      }
 
       function announceChange() {
         $rootScope.$emit(CHANGE_EVENT_NAME);
@@ -169,51 +206,44 @@ angular
 
       return {
         get inputValue() {
-          const { someEvenly, individually, splittingMethod, allEvenlyAmountPerPerson } = inputValue;
+          const {
+            someEvenly, individually, splittingMethod, allEvenlyAmountPerPerson
+          } = inputValue;
+          let individuallyParticipants = individually.participants.map(participant => {
+            const { selectedId, amount } = participant;
+            const { method, dollarAmount, percent, remainingAmount } = amount;
+            return {
+              selectedId,
+              amount: {
+                method,
+                dollarAmount: {
+                  raw: dollarAmount.raw,
+                  display: dollarAmount.display
+                },
+                percent: {
+                  raw: percent.raw,
+                  display: percent.display
+                },
+                remainingAmount: remainingAmount.display
+              }
+            }
+          });
           return {
             someEvenly: {
               amountPerPerson: someEvenly.amountPerPerson.display,
-              participants: someEvenly.participants.map(
-                participantInput => {
-                  let result = Object.assign({}, participantInput);
-                  let choiceIds = someEvenly.remainingChoiceIds;
-                  if (participantInput.selected !== null) {
-                    choiceIds.push(participantInput.selected.id);
-                  }
-                  result.choices = participants.map(
-                    participant => {
-                      const isValidChoice = choiceIds.indexOf(participant.id) > -1;
-                      return {
-                        value: participant,
-                        isValidChoice
-                      }
-                    }
-                  );
-                  return result;
-                }
+              participants: addChoicesArrayToParticipantInputs(
+                inputValue.someEvenly.participants,
+                inputValue.someEvenly.remainingChoiceIds
               )
             },
-            individually: individually.map(participant => {
-              const { selected, amount } = participant;
-              const { method, dollarAmount, percent, remainingAmount } = amount;
-              return {
-                selected: Object.assign({}, selected),
-                amount: {
-                  method,
-                  dollarAmount: {
-                    raw: dollarAmount.raw,
-                    display: dollarAmount.display
-                  },
-                  percent: {
-                    raw: percent.raw,
-                    display: percent.display
-                  },
-                  remainingAmount: remainingAmount.display
-                }
-              }
-            }),
-            splittingMethod,
-            allEvenlyAmountPerPerson: allEvenlyAmountPerPerson.display
+            individually: {
+              participants: addChoicesArrayToParticipantInputs(
+                individuallyParticipants,
+                inputValue.individually.remainingChoiceIds
+              ),
+              splittingMethod,
+              allEvenlyAmountPerPerson: allEvenlyAmountPerPerson.display
+            }
           };
         },
         subscribe(scope, callback) {

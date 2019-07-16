@@ -76,19 +76,19 @@
         - Remove
       </button>
       <div class="form-group form-inline some-evenly">
-        <label for="evenly-participant-{{$index + 1}}-name-select" class="participant-multiple">
+        <label for="evenly-participant-{{$index + 1}}-name-select">
           Name:
         </label>
         <select
           class="form-control"
           id="evenly-participant-{{$index + 1}}-name-select"
-          ng-model="participantInput.selected"
-          ng-change="$ctrl.handleChange(participantInput.selected, 'someEvenly', 'selected', $index)"
+          ng-model="participantInput.selectedId"
+          ng-change="$ctrl.handleChange(participantInput.selectedId, 'someEvenly', 'selectedId', $index)"
         >
           <option selected disabled ng-value="null">Select participant name</option>
           <option
             ng-repeat="participant in participantInput.choices track by participant.value.id"
-            ng-value="participant.value"
+            ng-value="participant.value.id"
             ng-disabled="participant.isValidChoice === false"
           >
             {{participant.value.name}}
@@ -123,23 +123,23 @@
       class="form-group form-inline some-evenly"
     >
       <legend>Responsible Participant {{$index + 1}}</legend>
-      <button class="remove-r-p btn btn-danger" ng-click="$ctrl.removeIndividually($index)">
+      <button class="remove-r-p btn btn-danger" ng-click="$ctrl.removeIndividuallyInput($index)">
         - Remove
       </button>
       <div class="form-group form-inline individually">
-        <label for="individually-participant-{{$index + 1}}-name-select" class="participant-multiple">
+        <label for="individually-participant-{{$index + 1}}-name-select">
           Name:
         </label>
         <select
           class="form-control"
           id="individually-participant-{{$index + 1}}-name-select"
-          ng-model="participantInput.selected"
-          ng-change="$ctrl.handleChange(participantInput.selected, 'individually', 'selected', $index)"
+          ng-model="participantInput.selectedId"
+          ng-change="$ctrl.handleChange(participantInput.selectedId, 'individually', 'selected', $index)"
         >
           <option selected disabled ng-value="null">Select participant name</option>
           <option
             ng-repeat="participant in $ctrl.participants track by participant.id"
-            ng-value="participant"
+            ng-value="participant.id"
           >
             {{participant.name}}
           </option>
