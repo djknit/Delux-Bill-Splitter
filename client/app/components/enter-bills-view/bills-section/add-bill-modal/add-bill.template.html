@@ -8,7 +8,7 @@
 
   <modal-body>
 
-    <form ng-if="!$ctrl.hasSuccess" id="{{$ctrl.FORM_NAME}}">
+    <form ng-if="!$ctrl.hasSuccess" id="{{$ctrl.FORM_NAME}}" novalidate>
       <bill-form-bill-name input-name="{{$ctrl.nameInputName}}" />
       <hr />
       <bill-form-amount />

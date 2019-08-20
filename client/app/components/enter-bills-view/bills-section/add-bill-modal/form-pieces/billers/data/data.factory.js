@@ -3,7 +3,8 @@
 angular
   .module('billFormBillersData')
   .factory('BillFormBillersData', [
-    '$rootScope', 'BillFormAmountData',
+    '$rootScope',
+    'BillFormAmountData',
     function($rootScope, BillFormAmountData) {
       let inputValue;
 

@@ -1,4 +1,6 @@
 'use-strict';
 
 angular
-  .module('billFormIsPaid', []);
+  .module('billFormIsPaid', [
+    'billFormIsPaidData'
+  ]);

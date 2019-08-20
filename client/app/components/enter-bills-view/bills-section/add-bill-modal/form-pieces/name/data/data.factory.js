@@ -4,7 +4,7 @@ angular
   .module('billFormNameData')
   .factory('BillFormNameData', ['$rootScope',
     function nameDataFactory($rootScope) {
-    
+
       let nameInputValue = null;
 
       const CHANGE_EVENT_NAME = 'bill-form-amount-change';

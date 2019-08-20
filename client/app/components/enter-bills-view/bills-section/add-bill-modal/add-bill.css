@@ -92,11 +92,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 #newBillForm .form-subsection > .biller-multiple,
-#newBillForm .form-subsection > .some-evenly {
+#newBillForm .form-subsection > .some-evenly,
+#newBillForm .form-subsection > .individually {
   position: relative;
 }
 #newBillForm .biller-multiple > .remove-biller,
-#newBillForm .some-evenly > .remove-r-p {
+#newBillForm .some-evenly > .remove-r-p,
+#newBillForm .individually > .remove-r-p {
   padding: 1px 3px;
   font-size: .7rem;
   position: absolute;
@@ -149,4 +151,9 @@ input[type=number]::-webkit-outer-spin-button {
 #add-rp-btn {
   font-size: .85rem;
   padding: .3rem .6rem;
+}
+
+#newBillForm .form-group.rp-individually-amount > legend,
+#newBillForm .form-group.individually > label {
+  font-size: .85rem;
 }

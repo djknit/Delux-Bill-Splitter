@@ -62,6 +62,12 @@
       <span class="amount">$ {{$ctrl.inputValue.allEvenlyAmountPerPerson}}</span>
       per person for each of the {{$ctrl.participants.length}} participants
     </div>
+    <div
+      ng-if="$ctrl.inputValue.allEvenlyAmountPerPerson === null"
+      id="amount-per-person-display"
+    >
+      Add the bill total to see the cost per person.
+    </div>
   </div>
   <fieldset
     ng-if="$ctrl.inputValue.splittingMethod === 'evenlyBetweenSome'"
@@ -87,11 +93,11 @@
         >
           <option selected disabled ng-value="null">Select participant name</option>
           <option
-            ng-repeat="participant in participantInput.choices track by participant.value.id"
-            ng-value="participant.value.id"
-            ng-disabled="participant.isValidChoice === false"
+            ng-repeat="choice in participantInput.choices track by choice.value.id"
+            ng-value="choice.value.id"
+            ng-disabled="choice.isValidChoice === false"
           >
-            {{participant.value.name}}
+            {{choice.value.name}}
           </option>
         </select>
       </div>
@@ -104,6 +110,12 @@
       <span class="amount">$ {{$ctrl.inputValue.someEvenly.amountPerPerson}}</span> per
       person for each of the {{$ctrl.inputValue.someEvenly.participants.length}} participants
       <hr class="mult-entities-name-separator" />
+    </div>
+    <div
+      ng-if="$ctrl.inputValue.someEvenly.amountPerPerson === null"
+      id="amount-per-person-display"
+    >
+      Add the bill total to see the cost per person.
     </div>
     <button
       class="btn btn-primary"
@@ -119,8 +131,8 @@
     class="responsible-participant-names form-subsection"
   >
     <fieldset
-      ng-repeat="participantInput in $ctrl.inputValue.individually.participants"
-      class="form-group form-inline some-evenly"
+      ng-repeat="participantInput in $ctrl.inputValue.individually.participants track by $index"
+      class="form-group form-inline individually"
     >
       <legend>Responsible Participant {{$index + 1}}</legend>
       <button class="remove-r-p btn btn-danger" ng-click="$ctrl.removeIndividuallyInput($index)">
@@ -138,14 +150,75 @@
         >
           <option selected disabled ng-value="null">Select participant name</option>
           <option
-            ng-repeat="participant in participantInput.choices track by participant.value.id"
-            ng-value="participant.value.id"
+            ng-repeat="choice in participantInput.choices track by choice.value.id"
+            ng-value="choice.value.id"
             ng-disabled="participant.isValidChoice === false"
           >
-            {{participant.value.name}}
+            {{choice.value.name}}
           </option>
         </select>
       </div>
+      <fieldset class="form-group rp-individually-amount">
+        <legend>
+          How do you want to determine the amount owed by this participant?
+        </legend>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="individually-participant-{{$index + 1}}-amount-method-in"
+              id="individually-participant-{{$index + 1}}-amount-method-in_dollarAmount"
+              value="dollarAmount"
+              ng-model="participantInput.amount.method"
+              ng-change="$ctrl.handleChange(participantInput.amount.method, 'individually', 'amount', $index, 'method')"
+            />
+            <label
+              class="form-check-label"
+              for="individually-participant-{{$index + 1}}-amount-method-in_dollarAmount"
+            >
+              Dollar amount
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="individually-participant-{{$index + 1}}-amount-method-in"
+              id="individually-participant-{{$index + 1}}-amount-method-in_percent"
+              value="percent"
+              ng-model="participantInput.amount.method"
+              ng-change="$ctrl.handleChange(participantInput.amount.method, 'individually', 'amount', $index, 'method')"
+            />
+            <label
+              class="form-check-label"
+              for="individually-participant-{{$index + 1}}-amount-method-in_percent"
+            >
+              Percent of bill total
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="individually-participant-{{$index + 1}}-amount-method-in"
+              id="individually-participant-{{$index + 1}}-amount-method-in_remainingAmount"
+              value="remainingAmount"
+              ng-model="participantInput.amount.method"
+              ng-change="$ctrl.handleChange(participantInput.amount.method, 'individually', 'amount', $index, 'method')"
+            />
+            <label
+              class="form-check-label"
+              for="individually-participant-{{$index + 1}}-amount-method-in_remainingAmount"
+            >
+              Remaining amount
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+
+        </div>
+      </fieldset>
       <hr class="mult-entities-name-separator" />
     </fieldset>
     <button

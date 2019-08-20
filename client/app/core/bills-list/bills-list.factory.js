@@ -56,12 +56,15 @@ angular
       }
 
       function removeParticipant(id) {
+        console.log('hit removeParticipant')
+        console.log(`id: ${id}`)
         return new Promise(
           (resolve, reject) => {
             for (let i = 0; i < participants.length; i++) {
               if (participants[i].id === id) {
                 const removedParticipantName = participants[i].name;
                 participants.splice(i, 1);
+                console.log(participants)
                 return resolve(removedParticipantName);
               }
             }

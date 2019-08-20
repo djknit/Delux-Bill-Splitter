@@ -3,7 +3,9 @@
 angular
   .module('billFormResponsibilityData')
   .factory('BillFormResponsibilityData', [
-    'BillsList', 'BillFormAmountData', '$rootScope',
+    'BillsList',
+    'BillFormAmountData',
+    '$rootScope',
     function(BillsList, BillFormAmountData, $rootScope) {
 
       const CHANGE_EVENT_NAME = 'bill-form-responsibility-change';
@@ -14,7 +16,7 @@ angular
           participants = updatedParticipants;
           if (participants.length === 0) {
             inputValue.someEvenly.participants = [];
-            inputValue.individually = [];
+            inputValue.individually.participants = [];
           }
           else {
             checkParticipantsArrayForRemovedParticipants(inputValue.individually.participants);
@@ -209,9 +211,7 @@ angular
 
       return {
         get inputValue() {
-          const {
-            someEvenly, individually, splittingMethod, allEvenlyAmountPerPerson
-          } = inputValue;
+          const { someEvenly, individually, splittingMethod, allEvenlyAmountPerPerson } = inputValue;
           let individuallyParticipants = individually.participants.map(participant => {
             const { selectedId, amount } = participant;
             const { method, dollarAmount, percent, remainingAmount } = amount;
